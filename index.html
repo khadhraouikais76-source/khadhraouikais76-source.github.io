@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Score Live – مباشر حقيقي (Widget)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Cairo',sans-serif;background:#0b0f1a;color:#fff}
+header{background:#11162a;padding:15px;text-align:center;font-size:22px;color:#4da3ff}
+.container{padding:10px;max-width:1200px;margin:auto}
+.note{color:#aaa;text-align:center;margin:10px 0;font-size:13px}
+iframe{width:100%;border:0;border-radius:12px;background:#11162a}
+.tabs{display:flex;gap:8px;justify-content:center;margin:10px 0}
+.tabs button{background:#161c36;color:#ffd24d;border:0;padding:8px 12px;border-radius:8px;cursor:pointer}
+.tabs button.active{background:#4da3ff;color:#000}
+</style>
+</head>
+<body>
+<header>⚽ Score Live – مباشر حقيقي (أمس / اليوم / الغد / أسبوع)</header>
+<div class="container">
+  <div class="tabs">
+    <button class="active" onclick="show('today')">اليوم</button>
+    <button onclick="show('yesterday')">الأمس</button>
+    <button onclick="show('tomorrow')">الغد</button>
+    <button onclick="show('week')">أسبوع</button>
+  </div>  <!-- مصدر موثوق ومفتوح عبر Widget (لا CORS، يعمل على GitHub Pages) -->  <iframe id="today" height="900" src="https://www.scorebat.com/embed/livescore/?token=FREE&timezone=UTC"></iframe>
+  <iframe id="yesterday" height="900" style="display:none" src="https://www.scorebat.com/embed/livescore/?token=FREE&timezone=UTC&day=yesterday"></iframe>
+  <iframe id="tomorrow" height="900" style="display:none" src="https://www.scorebat.com/embed/livescore/?token=FREE&timezone=UTC&day=tomorrow"></iframe>
+  <iframe id="week" height="900" style="display:none" src="https://www.scorebat.com/embed/livescore/?token=FREE&timezone=UTC&range=7"></iframe>  <div class="note">مصدر مفتوح عبر Widget رسمي — تحديث مباشر بدون API أو بروكسي.</div>
+</div><script>
+function show(id){
+  document.querySelectorAll('iframe').forEach(f=>f.style.display='none');
+  document.getElementById(id).style.display='block';
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+</script></body>
+</html>
