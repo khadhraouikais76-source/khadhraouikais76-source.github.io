@@ -2,115 +2,91 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Live Football Matches & Scores</title>
+<title>Live Football Matches</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- BASIC SEO -->
-<meta name="description" content="Live football matches, scores, yesterday results and upcoming games in France, England and Germany.">
-<meta name="keywords" content="live football, football scores, matches today, Ligue 1, Premier League, Bundesliga, live scores">
+<!-- SEO -->
+<meta name="description" content="Live football matches and scores from France, England and Germany.">
+<meta name="keywords" content="live football, football scores, matches today, Ligue 1, Premier League, Bundesliga">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Live Football Matches">
 
-<!-- OPEN GRAPH -->
-<meta property="og:title" content="Live Football Matches & Scores">
-<meta property="og:description" content="Watch live football scores and match schedules from top European leagues.">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Live Football Matches">
-
-<!-- GOOGLE STRUCTURED DATA -->
+<!-- STRUCTURED DATA -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SportsWebsite",
   "name": "Live Football Matches",
   "url": "https://khadhraouikais76-source.github.io/",
-  "description": "Live football matches, scores and fixtures for France, England and Germany.",
   "sport": "Football",
-  "inLanguage": ["en", "fr", "de"],
+  "inLanguage": ["en","fr","de"],
   "publisher": {
     "@type": "Organization",
     "name": "Live Football Matches",
     "contactPoint": {
       "@type": "ContactPoint",
       "email": "khadhraouikais76@gmail.com",
-      "contactType": "customer support"
+      "contactType": "support"
     }
   }
 }
 </script>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f7fb;
-  color: #111;
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f4f7fb;
+  color:#111;
 }
-
-.container {
-  max-width: 950px;
-  margin: auto;
-  padding: 15px;
+.container{
+  max-width:950px;
+  margin:auto;
+  padding:15px;
 }
-
-h1 {
-  text-align: center;
-  margin-bottom: 15px;
+h1{
+  text-align:center;
+  margin-bottom:15px;
 }
-
-/* NAV BUTTONS */
-.nav-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-bottom: 20px;
+.nav{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-bottom:20px;
 }
-
-.nav-buttons button {
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  background: #2563eb;
-  color: #fff;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
+.nav button{
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#2563eb;
+  color:#fff;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
 }
-
-.nav-buttons button:hover {
-  background: #1e40af;
+.nav button.active{
+  background:#16a34a;
 }
-
-.nav-buttons button.active {
-  background: #16a34a;
+.section{
+  display:none;
+  background:#fff;
+  padding:15px;
+  border-radius:14px;
 }
-
-/* CONTENT SECTIONS */
-.section {
-  display: none;
-  background: #ffffff;
-  padding: 18px;
-  border-radius: 14px;
+.section.active{
+  display:block;
 }
-
-.section.active {
-  display: block;
+.footer{
+  margin-top:30px;
+  text-align:center;
 }
-
-/* FOOTER */
-.footer-links {
-  margin-top: 30px;
-  text-align: center;
-}
-
-.footer-links button {
-  background: none;
-  border: none;
-  color: #2563eb;
-  font-size: 14px;
-  margin: 0 8px;
-  cursor: pointer;
+.footer button{
+  background:none;
+  border:none;
+  color:#2563eb;
+  font-size:14px;
+  margin:0 8px;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -120,95 +96,89 @@ h1 {
 
 <h1 id="siteTitle">Live Football Matches</h1>
 
-<div class="nav-buttons">
-  <button onclick="showSection('home')" class="active" id="btnHome">Matches</button>
-  <button onclick="showSection('france')" id="btnFrance">France</button>
-  <button onclick="showSection('england')" id="btnEngland">England</button>
-  <button onclick="showSection('germany')" id="btnGermany">Germany</button>
+<div class="nav">
+  <button id="btnHome" class="active" onclick="loadMatches('')">Matches</button>
+  <button id="btnFrance" onclick="loadMatches('France')">France</button>
+  <button id="btnEngland" onclick="loadMatches('England')">England</button>
+  <button id="btnGermany" onclick="loadMatches('Germany')">Germany</button>
 </div>
 
-<!-- HOME -->
-<div id="home" class="section active">
+<div id="matches" class="section active">
   <div id="scorebat-widget"></div>
 </div>
 
-<!-- FRANCE -->
-<div id="france" class="section">
-  <div data-competition="France" data-dark="false"></div>
-</div>
-
-<!-- ENGLAND -->
-<div id="england" class="section">
-  <div data-competition="England" data-dark="false"></div>
-</div>
-
-<!-- GERMANY -->
-<div id="germany" class="section">
-  <div data-competition="Germany" data-dark="false"></div>
-</div>
-
-<!-- ABOUT -->
 <div id="about" class="section">
-  <h2 id="aboutTitle">About</h2>
-  <p id="aboutText">
-    This website provides live football scores and fixtures from major European leagues.
-  </p>
+  <h2>About</h2>
+  <p>This website shows live football matches and scores from major European leagues.</p>
 </div>
 
-<!-- PRIVACY -->
 <div id="privacy" class="section">
-  <h2 id="privacyTitle">Privacy Policy</h2>
-  <p id="privacyText">
-    We do not collect personal data. Third-party services may use cookies.
-  </p>
+  <h2>Privacy Policy</h2>
+  <p>No personal data is collected. Third-party services may use cookies.</p>
 </div>
 
-<!-- CONTACT -->
 <div id="contact" class="section">
-  <h2 id="contactTitle">Contact</h2>
-  <p id="contactText">
-    Email: <strong>khadhraouikais76@gmail.com</strong>
-  </p>
+  <h2>Contact</h2>
+  <p>Email: <strong>khadhraouikais76@gmail.com</strong></p>
 </div>
 
-<div class="footer-links">
-  <button onclick="showSection('about')">About</button>
-  <button onclick="showSection('privacy')">Privacy</button>
-  <button onclick="showSection('contact')">Contact</button>
+<div class="footer">
+  <button onclick="showInfo('about')">About</button>
+  <button onclick="showInfo('privacy')">Privacy</button>
+  <button onclick="showInfo('contact')">Contact</button>
 </div>
 
 </div>
-
-<script src="https://www.scorebat.com/embed/livescore/"></script>
 
 <script>
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+function clearActive(){
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+}
+
+function loadMatches(country){
+  clearActive();
+  document.getElementById(
+    country === '' ? 'btnHome' :
+    country === 'France' ? 'btnFrance' :
+    country === 'England' ? 'btnEngland' : 'btnGermany'
+  ).classList.add('active');
+
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('matches').classList.add('active');
+
+  const w = document.getElementById("scorebat-widget");
+  w.innerHTML = "";
+  if(country) w.setAttribute("data-competition", country);
+  else w.removeAttribute("data-competition");
+
+  const s = document.createElement("script");
+  s.src = "https://www.scorebat.com/embed/livescore/";
+  w.appendChild(s);
+}
+
+function showInfo(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-
-  document.querySelectorAll('.nav-buttons button').forEach(b => b.classList.remove('active'));
-  const btn = document.getElementById('btn' + id.charAt(0).toUpperCase() + id.slice(1));
-  if (btn) btn.classList.add('active');
+  clearActive();
 }
 
-/* AUTO LANGUAGE */
+/* LANGUAGE */
 const lang = navigator.language || "";
-
-if (lang.startsWith("fr")) {
-  siteTitle.textContent = "Matchs de football en direct";
-  btnHome.textContent = "Matchs";
-  btnFrance.textContent = "France";
-  btnEngland.textContent = "Angleterre";
-  btnGermany.textContent = "Allemagne";
+if(lang.startsWith("fr")){
+  siteTitle.textContent="Matchs de football en direct";
+  btnHome.textContent="Matchs";
+  btnEngland.textContent="Angleterre";
+  btnGermany.textContent="Allemagne";
+}
+if(lang.startsWith("de")){
+  siteTitle.textContent="Live Fußballspiele";
+  btnHome.textContent="Spiele";
+  btnFrance.textContent="Frankreich";
+  btnGermany.textContent="Deutschland";
 }
 
-if (lang.startsWith("de")) {
-  siteTitle.textContent = "Live Fußballspiele";
-  btnHome.textContent = "Spiele";
-  btnFrance.textContent = "Frankreich";
-  btnEngland.textContent = "England";
-  btnGermany.textContent = "Deutschland";
-}
+/* LOAD DEFAULT */
+loadMatches('');
 </script>
 
 </body>
