@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8858989765307569"
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8858989765307569"
      crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +27,9 @@ iframe{width:100%;min-height:85vh;border:0}
   <a href="#privacy">Privacy</a>
   <a href="#contact">Contact</a>
 </nav><section id="home" class="active">
+  <div class="container" style="padding:16px;margin-bottom:12px">
+    <p id="seoText"></p>
+  </div>
   <div class="container">
     <iframe src="https://www.scorebat.com/embed/livescore/" loading="lazy" allowfullscreen></iframe>
   </div>
@@ -53,6 +56,18 @@ function showPage(){
   if(page) page.classList.add('active');
 }
 window.addEventListener('hashchange', showPage);
+// SEO text by browser language
+const seo = document.getElementById('seoText');
+const l = (navigator.language || 'en').toLowerCase();
+if(l.startsWith('ar')){
+  seo.textContent = 'نوفر لك مباريات كرة القدم اليوم مع النتائج المباشرة، مباريات الأمس والغد، وجداول كاملة لأهم الدوريات العالمية في واجهة سريعة وسهلة الاستخدام.';
+}
+else if(l.startsWith('fr')){
+  seo.textContent = 'Consultez les matchs de football en direct, les résultats d’hier et de demain, ainsi que le calendrier complet des principales ligues.';
+}
+else{
+  seo.textContent = 'Check today football matches with live scores, yesterday and tomorrow fixtures, and full weekly schedules from top leagues worldwide.';
+}
 showPage();
 </script></body>
 </html>
