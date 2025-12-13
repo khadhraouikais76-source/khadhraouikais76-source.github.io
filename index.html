@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8858989765307569"
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8858989765307569"
      crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,6 +36,7 @@ iframe{width:100%;min-height:85vh;border:0}
 </style></head>
 <body><nav>
   <a href="#home" data-i18n="home">Home</a>
+  <a href="#france" data-i18n="france">France</a>
   <a href="#about" data-i18n="about">About</a>
   <a href="#privacy" data-i18n="privacy">Privacy</a>
   <a href="#contact" data-i18n="contact">Contact</a>
@@ -45,6 +46,14 @@ iframe{width:100%;min-height:85vh;border:0}
   </div>
   <div class="container">
     <iframe src="https://www.scorebat.com/embed/livescore/" loading="lazy" allowfullscreen></iframe>
+  </div>
+</section><section id="france">
+  <div class="container" style="padding:16px;margin-bottom:12px">
+    <h2 data-i18n="fr_title">France – Football Matches</h2>
+    <p data-i18n="fr_text">Live football matches and results from French leagues including Ligue 1 and Ligue 2. Follow today, tomorrow and weekly fixtures.</p>
+  </div>
+  <div class="container">
+    <iframe src="https://www.scorebat.com/embed/league/france-ligue-1/" loading="lazy" allowfullscreen></iframe>
   </div>
 </section><section id="about">
   <div class="container" style="padding:16px">
@@ -68,9 +77,12 @@ const lang = (navigator.language || 'en').toLowerCase();
 const i18n = {
   ar: {
     home: 'المباريات',
+    france: 'فرنسا',
     about: 'من نحن',
     privacy: 'سياسة الخصوصية',
     contact: 'اتصل بنا',
+    fr_title: 'مباريات فرنسا',
+    fr_text: 'تابع مباريات كرة القدم الفرنسية مباشرة، بما في ذلك الدوري الفرنسي الدرجة الأولى والثانية، مع النتائج وجدول الأسبوع.',
     about_title: 'من نحن',
     about_text: 'نوفّر لك نتائج مباريات كرة القدم المباشرة، وجدول المباريات، والنتائج من مختلف الدوريات العالمية في واجهة سريعة وسهلة الاستخدام.',
     privacy_title: 'سياسة الخصوصية',
@@ -80,25 +92,31 @@ const i18n = {
   },
   fr: {
     home: 'Matchs',
+    france: 'France',
     about: 'À propos',
     privacy: 'Confidentialité',
     contact: 'Contact',
+    fr_title: 'Matchs de football en France',
+    fr_text: 'Matchs et résultats de football en direct des ligues françaises, y compris la Ligue 1 et la Ligue 2.',
     about_title: 'À propos',
-    about_text: 'Nous fournissons les scores de football en direct, les calendriers et les résultats des ligues du monde entier dans une interface rapide et simple.',
+    about_text: 'Nous fournissons les scores de football en direct, les calendriers et les résultats des ligues du monde entier.',
     privacy_title: 'Politique de confidentialité',
-    privacy_text: 'Nous respectons votre vie privée. Des partenaires tiers comme Google peuvent utiliser des cookies pour afficher des annonces selon vos visites précédentes.',
+    privacy_text: 'Nous respectons votre vie privée. Google et ses partenaires peuvent utiliser des cookies pour afficher des annonces.',
     contact_title: 'Contact',
     contact_text: 'Email : khadhraouikais76@gmail.com'
   },
   en: {
     home: 'Matches',
+    france: 'France',
     about: 'About',
     privacy: 'Privacy',
     contact: 'Contact',
+    fr_title: 'France Football Matches',
+    fr_text: 'Live football matches and results from France including Ligue 1 and Ligue 2 fixtures.',
     about_title: 'About Us',
-    about_text: 'We provide live football scores, fixtures and results from leagues around the world in a fast and simple interface.',
+    about_text: 'We provide live football scores, fixtures and results from leagues around the world.',
     privacy_title: 'Privacy Policy',
-    privacy_text: 'We respect your privacy. Third-party vendors such as Google may use cookies to serve ads based on prior visits.',
+    privacy_text: 'We respect your privacy. Google and partners may use cookies to serve ads.',
     contact_title: 'Contact',
     contact_text: 'Email: khadhraouikais76@gmail.com'
   }
