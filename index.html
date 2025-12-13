@@ -1,11 +1,24 @@
 <!DOCTYPE html><html lang="en">
 <head>
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8858989765307569"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8858989765307569"
      crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Football Scores | Match Center</title>
-<meta name="description" content="Live football scores, fixtures and results. Yesterday, today, tomorrow and weekly matches.">
+<title>Live Football Scores | Match Center</title><!-- Schema.org: SportsEvent / WebSite --><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Live Football Scores",
+  "url": "https://khadhraouikais76-source.github.io",
+  "description": "Live football scores, fixtures and results for yesterday, today, tomorrow and the full week.",
+  "inLanguage": ["en", "ar", "fr"],
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://khadhraouikais76-source.github.io/#home",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script><meta name="description" content="Live football scores, fixtures and results. Yesterday, today, tomorrow and weekly matches.">
 <meta name="keywords" content="live scores, football live, soccer results, fixtures">
 <meta name="robots" content="index, follow"><style>
 :root{
@@ -22,10 +35,10 @@ iframe{width:100%;min-height:85vh;border:0}
 .footer{text-align:center;font-size:13px;opacity:.8;padding:14px}
 </style></head>
 <body><nav>
-  <a href="#home">Home</a>
-  <a href="#about">About</a>
-  <a href="#privacy">Privacy</a>
-  <a href="#contact">Contact</a>
+  <a href="#home" data-i18n="home">Home</a>
+  <a href="#about" data-i18n="about">About</a>
+  <a href="#privacy" data-i18n="privacy">Privacy</a>
+  <a href="#contact" data-i18n="contact">Contact</a>
 </nav><section id="home" class="active">
   <div class="container" style="padding:16px;margin-bottom:12px">
     <p id="seoText"></p>
@@ -35,20 +48,72 @@ iframe{width:100%;min-height:85vh;border:0}
   </div>
 </section><section id="about">
   <div class="container" style="padding:16px">
-    <h2>About Us</h2>
-    <p>We provide live football scores, fixtures and results from leagues around the world in a fast and simple interface.</p>
+    <h2 data-i18n="about_title">About Us</h2>
+    <p data-i18n="about_text">We provide live football scores, fixtures and results from leagues around the world in a fast and simple interface.</p>
   </div>
 </section><section id="privacy">
   <div class="container" style="padding:16px">
-    <h2>Privacy Policy</h2>
-    <p>We respect your privacy. Third-party vendors such as Google may use cookies to serve ads based on prior visits.</p>
+    <h2 data-i18n="privacy_title">Privacy Policy</h2>
+    <p data-i18n="privacy_text">We respect your privacy. Third-party vendors such as Google may use cookies to serve ads based on prior visits.</p>
   </div>
 </section><section id="contact">
   <div class="container" style="padding:16px">
-    <h2>Contact</h2>
-    <p>Email: khadhraouikais76@gmail.com</p>
+    <h2 data-i18n="contact_title">Contact</h2>
+    <p data-i18n="contact_text">Email: khadhraouikais76@gmail.com</p>
   </div>
 </section><div class="footer">© 2025 Live Match Center</div><script>
+// Navigation & SEO language handling
+const lang = (navigator.language || 'en').toLowerCase();
+
+const i18n = {
+  ar: {
+    home: 'المباريات',
+    about: 'من نحن',
+    privacy: 'سياسة الخصوصية',
+    contact: 'اتصل بنا',
+    about_title: 'من نحن',
+    about_text: 'نوفّر لك نتائج مباريات كرة القدم المباشرة، وجدول المباريات، والنتائج من مختلف الدوريات العالمية في واجهة سريعة وسهلة الاستخدام.',
+    privacy_title: 'سياسة الخصوصية',
+    privacy_text: 'نحترم خصوصيتك. قد يستخدم شركاء خارجيون مثل Google ملفات تعريف الارتباط لعرض الإعلانات بناءً على زياراتك السابقة.',
+    contact_title: 'اتصل بنا',
+    contact_text: 'البريد الإلكتروني: khadhraouikais76@gmail.com'
+  },
+  fr: {
+    home: 'Matchs',
+    about: 'À propos',
+    privacy: 'Confidentialité',
+    contact: 'Contact',
+    about_title: 'À propos',
+    about_text: 'Nous fournissons les scores de football en direct, les calendriers et les résultats des ligues du monde entier dans une interface rapide et simple.',
+    privacy_title: 'Politique de confidentialité',
+    privacy_text: 'Nous respectons votre vie privée. Des partenaires tiers comme Google peuvent utiliser des cookies pour afficher des annonces selon vos visites précédentes.',
+    contact_title: 'Contact',
+    contact_text: 'Email : khadhraouikais76@gmail.com'
+  },
+  en: {
+    home: 'Matches',
+    about: 'About',
+    privacy: 'Privacy',
+    contact: 'Contact',
+    about_title: 'About Us',
+    about_text: 'We provide live football scores, fixtures and results from leagues around the world in a fast and simple interface.',
+    privacy_title: 'Privacy Policy',
+    privacy_text: 'We respect your privacy. Third-party vendors such as Google may use cookies to serve ads based on prior visits.',
+    contact_title: 'Contact',
+    contact_text: 'Email: khadhraouikais76@gmail.com'
+  }
+};
+
+let L = i18n.en;
+if(lang.startsWith('ar')) L = i18n.ar;
+else if(lang.startsWith('fr')) L = i18n.fr;
+
+// Apply nav translations
+document.querySelectorAll('[data-i18n]').forEach(el => {
+  const key = el.getAttribute('data-i18n');
+  if(L[key]) el.textContent = L[key];
+});
+
 function showPage(){
   const hash = location.hash.replace('#','') || 'home';
   document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
@@ -56,18 +121,19 @@ function showPage(){
   if(page) page.classList.add('active');
 }
 window.addEventListener('hashchange', showPage);
+
 // SEO text by browser language
 const seo = document.getElementById('seoText');
-const l = (navigator.language || 'en').toLowerCase();
-if(l.startsWith('ar')){
-  seo.textContent = 'نوفر لك مباريات كرة القدم اليوم مع النتائج المباشرة، مباريات الأمس والغد، وجداول كاملة لأهم الدوريات العالمية في واجهة سريعة وسهلة الاستخدام.';
+if(seo){
+  if(lang.startsWith('ar')){
+    seo.textContent = 'نوفر لك مباريات كرة القدم اليوم مع النتائج المباشرة، مباريات الأمس والغد، وجداول كاملة لأهم الدوريات العالمية.';
+  } else if(lang.startsWith('fr')){
+    seo.textContent = 'Consultez les matchs de football en direct, les résultats d’hier et de demain, ainsi que le calendrier complet des principales ligues.';
+  } else {
+    seo.textContent = 'Check today football matches with live scores, yesterday and tomorrow fixtures, and full weekly schedules from top leagues worldwide.';
+  }
 }
-else if(l.startsWith('fr')){
-  seo.textContent = 'Consultez les matchs de football en direct, les résultats d’hier et de demain, ainsi que le calendrier complet des principales ligues.';
-}
-else{
-  seo.textContent = 'Check today football matches with live scores, yesterday and tomorrow fixtures, and full weekly schedules from top leagues worldwide.';
-}
+
 showPage();
 </script></body>
 </html>
