@@ -1,129 +1,251 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="auto">
 <head>
 <meta charset="UTF-8">
-<title>Live Football Matches</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Live Football Matches</title>
+<meta name="description" content="Live football matches and scores by country. France, England, Germany and more.">
+<meta name="keywords" content="live football, live matches, football scores">
+<meta name="robots" content="index, follow">
 
 <style>
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:#f4f7fb;
+  background:#f3f6fb;
 }
+
+header{
+  background:#fff;
+  padding:15px;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+  text-align:center;
+}
+
+h1{margin:10px 0}
+
+.top-pages{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+
+.top-pages button{
+  border:none;
+  padding:8px 14px;
+  border-radius:8px;
+  background:#e8edf5;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.nav{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+  max-width:480px;
+  margin:15px auto;
+}
+
+.nav button{
+  border:none;
+  padding:14px;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:bold;
+  color:#fff;
+  cursor:pointer;
+}
+
+.green{background:#1aa34a}
+.blue{background:#2c64d8}
+
+.nav button.active{
+  background:#1aa34a !important;
+}
+
+iframe{
+  width:100%;
+  height:520px;
+  border:none;
+  border-radius:14px;
+  background:#fff;
+}
+
 .container{
   max-width:900px;
   margin:auto;
   padding:15px;
 }
-h1{
-  text-align:center;
-}
-.nav{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  margin-bottom:20px;
-}
-button{
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  font-size:15px;
-  font-weight:bold;
-  cursor:pointer;
-  color:#fff;
-  background:#2563eb;
-}
-button.active{
-  background:#16a34a;
-}
-.section{
-  display:none;
-  background:#fff;
-  padding:20px;
-  border-radius:14px;
-  min-height:400px;
-}
-.section.active{
-  display:block;
-}
-.link-box a{
-  display:block;
-  padding:15px;
-  margin-bottom:12px;
-  border-radius:10px;
-  background:#eef2ff;
-  text-decoration:none;
-  font-weight:bold;
-  color:#1e40af;
-}
-.footer{
-  text-align:center;
-  margin:25px 0;
-}
-.footer a{
-  margin:0 10px;
-  color:#2563eb;
-  text-decoration:none;
-  font-weight:bold;
-}
+
+.hidden{display:none}
 </style>
 </head>
 
 <body>
+
+<header>
+  <h1 id="title">Live Football Matches</h1>
+
+  <div class="top-pages">
+    <button onclick="showPage('matches')">Home</button>
+    <button onclick="showPage('privacy')">Privacy</button>
+    <button onclick="showPage('about')">About</button>
+    <button onclick="showPage('contact')">Contact</button>
+  </div>
+
+  <div class="nav">
+    <button class="green active" onclick="loadMatches('all',this)">Matches</button>
+    <button class="blue" onclick="loadMatches('fr',this)">France</button>
+    <button class="blue" onclick="loadMatches('eng',this)">England</button>
+    <button class="blue" onclick="loadMatches('de',this)">Germany</button>
+  </div>
+</header>
+
 <div class="container">
 
-<h1 id="title">Live Football Matches</h1>
+  <!-- MATCHES -->
+  <div id="matches">
+    <iframe id="matchFrame" src="https://www.scorebat.com/embed/livescore/"></iframe>
+  </div>
 
-<div class="nav">
-  <button id="btn-home" class="active" onclick="show('home','Live Football Matches')">Matches</button>
-  <button id="btn-fr" onclick="show('fr','France Matches')">France</button>
-  <button id="btn-en" onclick="show('en','England Matches')">England</button>
-  <button id="btn-de" onclick="show('de','Germany Matches')">Germany</button>
+  <!-- PRIVACY -->
+  <div id="privacy" class="hidden">
+    <h2 id="privacyTitle">Privacy Policy</h2>
+    <p id="privacyText">
+      This website respects the privacy of its visitors. We do not collect, store,
+      or process any personal data such as names, addresses, IP locations, or
+      browsing behavior. Our platform does not require user registration, login,
+      or account creation in order to access football match information.
+      <br><br>
+      All live match data, scores, and fixtures displayed on this website are
+      provided through publicly available third-party football data sources.
+      These external services may use their own cookies or tracking technologies,
+      which are governed by their respective privacy policies.
+      <br><br>
+      By using this website, you agree that you understand the nature of embedded
+      third-party content and acknowledge that we are not responsible for the
+      privacy practices of external websites. If you have any concerns regarding
+      data protection, you are encouraged to review the privacy policies of the
+      data providers directly.
+    </p>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="about" class="hidden">
+    <h2 id="aboutTitle">About Us</h2>
+    <p id="aboutText">
+      This website is dedicated to providing football fans with easy and fast
+      access to live match scores and fixtures from major football leagues around
+      the world. Our goal is to create a simple and user-friendly platform where
+      visitors can follow matches in real time without unnecessary complexity.
+      <br><br>
+      We cover popular competitions such as the English Premier League, French
+      Ligue 1, German Bundesliga, and international football events. The website
+      automatically adapts its language and layout based on the visitor’s browser
+      or selected country, ensuring a better experience for users from different
+      regions.
+      <br><br>
+      This project is informational only and does not provide betting services,
+      streaming, or downloadable content. All information is displayed for
+      educational and entertainment purposes, making it suitable for a wide
+      audience of football enthusiasts.
+    </p>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact" class="hidden">
+    <h2 id="contactTitle">Contact</h2>
+    <p>
+      If you have any questions, suggestions, or feedback regarding this website,
+      feel free to contact us. We welcome constructive input that helps improve
+      the quality and accuracy of the information presented.
+      <br><br>
+      For business inquiries, content-related questions, or technical issues,
+      please reach out via email. We aim to respond to all messages within a
+      reasonable time frame.
+      <br><br>
+      Email: <strong>khadhraouikais76@gmail.com</strong>
+    </p>
+  </div>
+
 </div>
-
-<!-- MATCHES -->
-<div id="home" class="section active">
-  <div id="scorebat-widget" style="min-height:800px"></div>
-</div>
-
-<!-- FRANCE -->
-<div id="fr" class="section link-box">
-  <a href="https://www.scorebat.com/france/" target="_blank">Live France Matches</a>
-  <a href="https://www.livescore.com/en/football/france/ligue-1/" target="_blank">Ligue 1 – Live Scores</a>
-</div>
-
-<!-- ENGLAND -->
-<div id="en" class="section link-box">
-  <a href="https://www.scorebat.com/england/" target="_blank">Live England Matches</a>
-  <a href="https://www.livescore.com/en/football/england/premier-league/" target="_blank">Premier League – Live</a>
-</div>
-
-<!-- GERMANY -->
-<div id="de" class="section link-box">
-  <a href="https://www.scorebat.com/germany/" target="_blank">Live Germany Matches</a>
-  <a href="https://www.livescore.com/en/football/germany/bundesliga/" target="_blank">Bundesliga – Live</a>
-</div>
-
-<div class="footer">
-  <a href="#">About</a>
-  <a href="#">Privacy</a>
-  <a href="#">Contact</a>
-</div>
-
-</div>
-
-<script src="https://www.scorebat.com/embed/livescore/"></script>
 
 <script>
-function show(id,title){
-  document.getElementById("title").innerText = title;
-  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  document.querySelectorAll("button").forEach(b=>b.classList.remove("active"));
-  document.getElementById("btn-"+id).classList.add("active");
+const frame=document.getElementById("matchFrame");
+const navButtons=document.querySelectorAll(".nav button");
+
+function loadMatches(country,btn){
+  showPage('matches');
+
+  navButtons.forEach(b=>{
+    b.classList.remove("active");
+    b.classList.add("blue");
+  });
+  btn.classList.add("active");
+  btn.classList.remove("blue");
+
+  if(country==="all")
+    frame.src="https://www.scorebat.com/embed/livescore/";
+  if(country==="fr")
+    frame.src="https://www.scorebat.com/embed/competition/france-ligue-1/";
+  if(country==="eng")
+    frame.src="https://www.scorebat.com/embed/competition/england-premier-league/";
+  if(country==="de")
+    frame.src="https://www.scorebat.com/embed/competition/germany-bundesliga/";
+
+  setLanguageByCountry(country);
 }
+
+function showPage(page){
+  document.querySelectorAll('.container > div').forEach(d=>{
+    d.classList.add('hidden');
+  });
+  document.getElementById(page).classList.remove('hidden');
+}
+
+function setLanguageByCountry(c){
+  if(c==="fr") setFR();
+  else if(c==="eng") setEN();
+  else if(c==="de") setDE();
+  else autoLanguage();
+}
+
+function setEN(){
+  document.documentElement.lang="en";
+  document.body.dir="ltr";
+  title.innerText="Live Football Matches";
+}
+
+function setFR(){
+  document.documentElement.lang="fr";
+  document.body.dir="ltr";
+  title.innerText="Matchs de Football en Direct";
+}
+
+function setDE(){
+  document.documentElement.lang="de";
+  document.body.dir="ltr";
+  title.innerText="Live Fußballspiele";
+}
+
+function autoLanguage(){
+  const l=navigator.language;
+  if(l.startsWith("ar")){
+    document.documentElement.lang="ar";
+    document.body.dir="rtl";
+    title.innerText="مباريات كرة القدم المباشرة";
+  }else if(l.startsWith("fr")){
+    setFR();
+  }else{
+    setEN();
+  }
+}
+
+autoLanguage();
 </script>
 
 </body>
