@@ -3,6 +3,7 @@
 <head>
    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8858989765307569"
      crossorigin="anonymous"></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Live Football Matches</title>
@@ -12,45 +13,108 @@
 <meta name="robots" content="index, follow">
 
 <style>
-/* نفس CSS تمامًا */
-body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb}
-header{background:#fff;padding:15px;box-shadow:0 2px 6px rgba(0,0,0,.1);text-align:center}
-h1{margin:10px 0}
-.top-pages{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
-.top-pages a{border:none;padding:8px 14px;border-radius:8px;background:#e8edf5;
-text-decoration:none;color:#000;font-weight:bold}
-.nav{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;max-width:480px;margin:15px auto}
-.nav button{border:none;padding:14px;border-radius:12px;font-size:16px;font-weight:bold;color:#fff;cursor:pointer}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f3f6fb;
+}
+
+header{
+  background:#fff;
+  padding:10px;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+  text-align:center;
+}
+
+h1{
+  margin:8px 0;
+  font-size:20px;
+}
+
+/* أزرار الدول (مصغّرة) */
+.nav{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  max-width:420px;
+  margin:10px auto;
+}
+
+.nav button{
+  border:none;
+  padding:8px 6px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:bold;
+  color:#fff;
+  cursor:pointer;
+}
+
 .green{background:#1aa34a}
 .blue{background:#2c64d8}
-.nav button.active{background:#1aa34a!important}
-iframe{width:100%;height:520px;border:none;border-radius:14px;background:#fff}
-.container{max-width:900px;margin:auto;padding:15px}
+
+.nav button.active{
+  background:#1aa34a!important;
+}
+
+iframe{
+  width:100%;
+  height:520px;
+  border:none;
+  border-radius:14px;
+  background:#fff;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:10px;
+}
+
+/* أزرار الصفحات في الأسفل */
+.footer-pages{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:20px 0 10px;
+}
+
+.footer-pages a{
+  padding:6px 12px;
+  border-radius:6px;
+  background:#e8edf5;
+  text-decoration:none;
+  color:#000;
+  font-size:13px;
+  font-weight:bold;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1 id="title">Live Football Matches</h1>
+  <h1 id="title">Live Football Matches</h1>
 
-<div class="top-pages">
-  <a href="index.html">Home</a>
-  <a href="privacy.html">Privacy</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-</div>
-
-<div class="nav">
-  <button class="green active" onclick="loadMatches('all',this)">Matches</button>
-  <button class="blue" onclick="loadMatches('fr',this)">France</button>
-  <button class="blue" onclick="loadMatches('eng',this)">England</button>
-  <button class="blue" onclick="loadMatches('de',this)">Germany</button>
-</div>
+  <div class="nav">
+    <button class="green active" onclick="loadMatches('all',this)">All</button>
+    <button class="blue" onclick="loadMatches('fr',this)">France</button>
+    <button class="blue" onclick="loadMatches('eng',this)">England</button>
+    <button class="blue" onclick="loadMatches('de',this)">Germany</button>
+  </div>
 </header>
 
 <div class="container">
   <iframe id="matchFrame" src="https://www.scorebat.com/embed/livescore/"></iframe>
+</div>
+
+<!-- روابط الصفحات في الأسفل -->
+<div class="footer-pages">
+  <a href="index.html">Home</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
 </div>
 
 <script>
@@ -58,18 +122,32 @@ const frame=document.getElementById("matchFrame");
 const navButtons=document.querySelectorAll(".nav button");
 
 function loadMatches(country,btn){
-  navButtons.forEach(b=>{b.classList.remove("active");b.classList.add("blue")});
-  btn.classList.add("active");btn.classList.remove("blue");
+  navButtons.forEach(b=>{
+    b.classList.remove("active");
+    b.classList.add("blue");
+  });
+  btn.classList.add("active");
+  btn.classList.remove("blue");
 
-  if(country==="all") frame.src="https://www.scorebat.com/embed/livescore/";
-  if(country==="fr") frame.src="https://www.scorebat.com/embed/competition/france-ligue-1/";
-  if(country==="eng") frame.src="https://www.scorebat.com/embed/competition/england-premier-league/";
-  if(country==="de") frame.src="https://www.scorebat.com/embed/competition/germany-bundesliga/";
+  if(country==="all")
+    frame.src="https://www.scorebat.com/embed/livescore/";
+  if(country==="fr")
+    frame.src="https://www.scorebat.com/embed/competition/france-ligue-1/";
+  if(country==="eng")
+    frame.src="https://www.scorebat.com/embed/competition/england-premier-league/";
+  if(country==="de")
+    frame.src="https://www.scorebat.com/embed/competition/germany-bundesliga/";
 }
 
+/* لغة تلقائية */
 const l=navigator.language;
-if(l.startsWith("ar")){document.body.dir="rtl";title.innerText="مباريات كرة القدم المباشرة"}
-else if(l.startsWith("fr")) title.innerText="Matchs de Football en Direct";
+if(l.startsWith("ar")){
+  document.body.dir="rtl";
+  title.innerText="مباريات كرة القدم المباشرة";
+}
+else if(l.startsWith("fr")){
+  title.innerText="Matchs de Football en Direct";
+}
 </script>
 
 </body>
