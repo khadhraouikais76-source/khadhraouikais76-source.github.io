@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="auto">
 <head>
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8858989765307569"
-     crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8858989765307569"
+crossorigin="anonymous"></script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,82 +13,18 @@
 <meta name="robots" content="index, follow">
 
 <style>
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f3f6fb;
-}
-
-header{
-  background:#fff;
-  padding:10px;
-  box-shadow:0 2px 6px rgba(0,0,0,.1);
-  text-align:center;
-}
-
-h1{
-  margin:8px 0;
-  font-size:20px;
-}
-
-/* أزرار الدول (مصغّرة) */
-.nav{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  max-width:420px;
-  margin:10px auto;
-}
-
-.nav button{
-  border:none;
-  padding:8px 6px;
-  border-radius:8px;
-  font-size:13px;
-  font-weight:bold;
-  color:#fff;
-  cursor:pointer;
-}
-
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6fb}
+header{background:#fff;padding:10px;box-shadow:0 2px 6px rgba(0,0,0,.1);text-align:center}
+h1{margin:8px 0;font-size:20px}
+.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:420px;margin:10px auto}
+.nav button{border:none;padding:8px 6px;border-radius:8px;font-size:13px;font-weight:bold;color:#fff;cursor:pointer}
 .green{background:#1aa34a}
 .blue{background:#2c64d8}
-
-.nav button.active{
-  background:#1aa34a!important;
-}
-
-iframe{
-  width:100%;
-  height:520px;
-  border:none;
-  border-radius:14px;
-  background:#fff;
-}
-
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:10px;
-}
-
-/* أزرار الصفحات في الأسفل */
-.footer-pages{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
-  margin:20px 0 10px;
-}
-
-.footer-pages a{
-  padding:6px 12px;
-  border-radius:6px;
-  background:#e8edf5;
-  text-decoration:none;
-  color:#000;
-  font-size:13px;
-  font-weight:bold;
-}
+.nav button.active{background:#1aa34a!important}
+iframe{width:100%;height:520px;border:none;border-radius:14px;background:#fff}
+.container{max-width:900px;margin:auto;padding:10px}
+.footer-pages{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:20px 0 10px}
+.footer-pages a{padding:6px 12px;border-radius:6px;background:#e8edf5;text-decoration:none;color:#000;font-size:13px;font-weight:bold}
 </style>
 </head>
 
@@ -109,7 +45,6 @@ iframe{
   <iframe id="matchFrame" src="https://www.scorebat.com/embed/livescore/"></iframe>
 </div>
 
-<!-- روابط الصفحات في الأسفل -->
 <div class="footer-pages">
   <a href="index.html">Home</a>
   <a href="privacy.html">Privacy</a>
@@ -118,14 +53,16 @@ iframe{
 </div>
 
 <script>
-const frame=document.getElementById("matchFrame");
-const navButtons=document.querySelectorAll(".nav button");
+/* ===== ORIGINAL BUTTON LOGIC (RESTORED) ===== */
+const frame = document.getElementById("matchFrame");
+const navButtons = document.querySelectorAll(".nav button");
 
-function loadMatches(country,btn){
+function loadMatches(country, btn){
   navButtons.forEach(b=>{
     b.classList.remove("active");
     b.classList.add("blue");
   });
+
   btn.classList.add("active");
   btn.classList.remove("blue");
 
@@ -139,15 +76,52 @@ function loadMatches(country,btn){
     frame.src="https://www.scorebat.com/embed/competition/germany-bundesliga/";
 }
 
-/* لغة تلقائية */
-const l=navigator.language;
-if(l.startsWith("ar")){
-  document.body.dir="rtl";
-  title.innerText="مباريات كرة القدم المباشرة";
-}
-else if(l.startsWith("fr")){
-  title.innerText="Matchs de Football en Direct";
-}
+/* ===== AUTO TRANSLATION (DOES NOT TOUCH LOGIC) ===== */
+document.addEventListener("DOMContentLoaded", async ()=>{
+
+  async function detectLang(){
+    try{
+      const r = await fetch("https://ipapi.co/json/");
+      const d = await r.json();
+      const map = {
+        TN:"ar", DZ:"ar", MA:"ar", EG:"ar", SA:"ar",
+        FR:"fr", BE:"fr", CA:"fr"
+      };
+      return map[d.country] || (navigator.language||"en").substring(0,2);
+    }catch(e){
+      return (navigator.language||"en").substring(0,2);
+    }
+  }
+
+  const lang = await detectLang();
+  if(lang === "en") return;
+
+  document.documentElement.lang = lang;
+  document.body.dir = (lang === "ar") ? "rtl" : "ltr";
+
+  const API = "https://api.mymemory.translated.net/get";
+
+  async function translate(text){
+    const r = await fetch(
+      API + "?q=" + encodeURIComponent(text) + "&langpair=en|" + lang
+    );
+    const j = await r.json();
+    return j.responseData?.translatedText || text;
+  }
+
+  document.title = await translate(document.title);
+
+  const walker = document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  let n;
+  while(n = walker.nextNode()){
+    if(
+      n.nodeValue.trim().length > 2 &&
+      !n.parentElement.closest("script,style,iframe")
+    ){
+      n.nodeValue = await translate(n.nodeValue);
+    }
+  }
+});
 </script>
 
 </body>

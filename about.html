@@ -43,6 +43,45 @@ This platform is for informational and entertainment purposes only.
 We do not offer betting services, live streaming, or downloadable content.
 </p>
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", async ()=>{
 
+  const API = "https://api.mymemory.translated.net/get";
+
+  async function langDetect(){
+    try{
+      const r = await fetch("https://ipapi.co/json/");
+      const d = await r.json();
+      return d.country === "TN" || d.country === "DZ" ? "ar"
+           : (navigator.language||"en").substring(0,2);
+    }catch(e){
+      return (navigator.language||"en").substring(0,2);
+    }
+  }
+
+  const lang = await langDetect();
+  if(lang==="en") return;
+
+  document.documentElement.lang = lang;
+  document.body.dir = (lang==="ar") ? "rtl" : "ltr";
+
+  async function t(x){
+    const r = await fetch(API+"?q="+encodeURIComponent(x)+"&langpair=en|"+lang);
+    const j = await r.json();
+    return j.responseData?.translatedText || x;
+  }
+
+  document.title = await t(document.title);
+
+  const w = document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  let n;
+  while(n = w.nextNode()){
+    if(n.nodeValue.trim().length>2 && !n.parentElement.closest("script,style")){
+      n.nodeValue = await t(n.nodeValue);
+    }
+  }
+
+});
+</script>
 </body>
 </html>

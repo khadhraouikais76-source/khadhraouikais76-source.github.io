@@ -45,6 +45,33 @@ We encourage users to review the privacy policies of any third-party websites
 they interact with through embedded content.
 </p>
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", async ()=>{
 
+  const API="https://api.mymemory.translated.net/get";
+  const lang=(navigator.language||"en").substring(0,2);
+  if(lang==="en") return;
+
+  document.documentElement.lang=lang;
+  document.body.dir=(lang==="ar")?"rtl":"ltr";
+
+  async function tr(s){
+    const r=await fetch(API+"?q="+encodeURIComponent(s)+"&langpair=en|"+lang);
+    const j=await r.json();
+    return j.responseData?.translatedText||s;
+  }
+
+  document.title=await tr(document.title);
+
+  const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  let n;
+  while(n=w.nextNode()){
+    if(n.nodeValue.trim().length>2 && !n.parentElement.closest("script,style")){
+      n.nodeValue=await tr(n.nodeValue);
+    }
+  }
+
+});
+</script>
 </body>
 </html>
