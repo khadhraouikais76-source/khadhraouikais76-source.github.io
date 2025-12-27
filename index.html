@@ -1,179 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <title>Top Score</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <style>
 body{margin:0;font-family:Arial;background:#f3f6fb}
-
-/* HEADER */
 header{
   background:#fff;
   padding:10px;
-  box-shadow:0 2px 6px rgba(0,0,0,.1);
-  text-align:center
+  text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.1)
 }
-h1{margin:6px 0;font-size:20px}
+h1{margin:5px;font-size:20px}
 
-/* NAV */
 .nav{
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  gap:8px;
+  gap:6px;
   max-width:520px;
-  margin:10px auto;
+  margin:10px auto
 }
 .nav button{
   border:none;
-  padding:8px 6px;
+  padding:8px;
   border-radius:8px;
   font-size:12px;
   font-weight:bold;
   color:#fff;
-  cursor:pointer;
-  background:#2563eb;
+  background:#2563eb
 }
-.nav button.active{background:#16a34a}
-.watchBtn{background:#22c55e!important}
+.watchBtn{background:#22c55e}
 
-/* CONTENT */
 .container{max-width:900px;margin:auto;padding:10px}
+
 iframe{
   width:100%;
   height:520px;
   border:none;
-  border-radius:14px;
+  border-radius:12px;
   background:#fff
 }
 
-/* WATCH LIST */
-#watchList,#watchView{display:none;margin-top:12px}
-.matchItem{
+#watchMenu{
+  display:none;
   background:#fff;
   padding:10px;
-  border-radius:10px;
+  border-radius:12px
+}
+
+.match{
+  padding:10px;
   margin-bottom:8px;
-  font-size:14px;
-}
-.matchItem button{
-  float:right;
-  background:#16a34a;
-  color:#fff;
-  border:none;
-  padding:6px 10px;
-  border-radius:6px;
+  background:#f1f5f9;
+  border-radius:8px;
   font-weight:bold;
-}
-
-/* WATCH VIEW */
-#watchView{
-  background:#020617;
-  color:#fff;
-  padding:12px;
-  border-radius:12px;
-}
-#wvStats{margin-top:8px;font-size:14px}
-
-/* FIELD */
-.field{
-  height:220px;
-  margin-top:12px;
-  border-radius:12px;
-  position:relative;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      #0b8a3d 0,
-      #0b8a3d 40px,
-      #0a7a33 40px,
-      #0a7a33 80px
-    );
-  overflow:hidden;
-}
-.field:before{
-  content:"";
-  position:absolute;
-  inset:10px;
-  border:2px solid rgba(255,255,255,.8);
-  border-radius:10px;
-}
-.field:after{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:10px;
-  bottom:10px;
-  width:2px;
-  background:rgba(255,255,255,.8);
-}
-.circle{
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:60px;
-  height:60px;
-  border:2px solid rgba(255,255,255,.8);
-  border-radius:50%;
-  transform:translate(-50%,-50%);
-}
-.dot{
-  width:8px;
-  height:8px;
-  background:#fff;
-  border-radius:50%;
-  position:absolute;
-}
-
-/* GOALS */
-.goal{
-  position:absolute;
-  top:60px;
-  width:24px;
-  height:100px;
-  border:2px solid #fff;
-}
-.goal.left{left:10px}
-.goal.right{right:10px}
-
-/* GOAL ALERT */
-.goalBox{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:rgba(0,0,0,.8);
-  padding:22px 30px;
-  border-radius:16px;
-  font-size:36px;
-  font-weight:bold;
-  color:#22c55e;
-  display:none;
-  z-index:20;
-  animation:pop .5s ease;
-}
-@keyframes pop{
-  from{transform:translate(-50%,-50%) scale(.5);opacity:0}
-  to{transform:translate(-50%,-50%) scale(1);opacity:1}
-}
-
-/* FOOTER */
-.footer{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  flex-wrap:wrap;
-  margin:20px 0;
-}
-.footer a{
-  padding:6px 12px;
-  border-radius:6px;
-  background:#e8edf5;
-  text-decoration:none;
-  color:#000;
-  font-size:13px;
-  font-weight:bold;
+  cursor:pointer
 }
 </style>
 </head>
@@ -181,69 +63,44 @@ iframe{
 <body>
 
 <header>
-<h1>Live Football Matches</h1>
+<h1>Live Football</h1>
 <div class="nav">
   <button class="watchBtn" onclick="openWatch()">WATCH</button>
-  <button class="active" onclick="loadMatches('all',this)">All</button>
-  <button onclick="loadMatches('fr',this)">France</button>
-  <button onclick="loadMatches('eng',this)">England</button>
-  <button onclick="loadMatches('de',this)">Germany</button>
+  <button onclick="load('all')">All</button>
+  <button onclick="load('fr')">France</button>
+  <button onclick="load('eng')">England</button>
+  <button onclick="load('de')">Germany</button>
 </div>
 </header>
 
 <div class="container">
 
-<iframe id="matchFrame"
-src="https://www.scorebat.com/embed/livescore/"></iframe>
+<iframe id="frame" src="https://www.scorebat.com/embed/livescore/"></iframe>
 
-<div id="watchList"></div>
-
-<div id="watchView">
-  <b id="wvTeams"></b><br>
-  <span id="wvScore"></span> —
-  <span id="wvTime"></span>
-
-  <div id="wvStats"></div>
-
-  <div class="field" id="field">
-    <div class="goal left"></div>
-    <div class="goal right"></div>
-    <div class="circle"></div>
-    <div class="goalBox" id="goalBox">⚽ GOAL!</div>
+<div id="watchMenu">
+  <div class="match" onclick="play('https://www.scorebat.com/embed/competition/england-premier-league/')">
+    Premier League (Live)
+  </div>
+  <div class="match" onclick="play('https://www.scorebat.com/embed/competition/france-ligue-1/')">
+    Ligue 1 (Live)
+  </div>
+  <div class="match" onclick="play('https://www.scorebat.com/embed/competition/germany-bundesliga/')">
+    Bundesliga (Live)
+  </div>
+  <div class="match" onclick="play('https://www.scorebat.com/embed/livescore/')">
+    All Live Matches
   </div>
 </div>
 
 </div>
 
-<div class="footer">
-  <a href="#">Home</a>
-  <a href="#">About</a>
-  <a href="#">Privacy</a>
-  <a href="#">Contact</a>
-  <a href="#" onclick="openWatch()">Watch</a>
-</div>
-
 <script>
-const API_KEY = "e7fb3e64e0f82630db8e4348c4892770";
+const frame=document.getElementById("frame");
+const menu=document.getElementById("watchMenu");
 
-const frame = document.getElementById("matchFrame");
-const watchList = document.getElementById("watchList");
-const watchView = document.getElementById("watchView");
-
-let matchInterval=null;
-let fakeInterval=null;
-let lastHome=null;
-let lastAway=null;
-
-/* SCOREBAT */
-function loadMatches(c,btn){
-  document.querySelectorAll(".nav button:not(.watchBtn)")
-    .forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
-
+function load(c){
+  menu.style.display="none";
   frame.style.display="block";
-  watchList.style.display="none";
-  watchView.style.display="none";
 
   if(c==="all") frame.src="https://www.scorebat.com/embed/livescore/";
   if(c==="fr") frame.src="https://www.scorebat.com/embed/competition/france-ligue-1/";
@@ -251,119 +108,29 @@ function loadMatches(c,btn){
   if(c==="de") frame.src="https://www.scorebat.com/embed/competition/germany-bundesliga/";
 }
 
-/* WATCH LIST */
 function openWatch(){
   frame.style.display="none";
-  watchView.style.display="none";
-  watchList.style.display="block";
-  watchList.innerHTML="Loading live matches...";
-
-  fetch("https://v3.football.api-sports.io/fixtures?live=all",{
-    headers:{ "x-apisports-key":API_KEY }
-  })
-  .then(r=>r.json())
-  .then(d=>{
-    watchList.innerHTML="";
-    if(!d.response.length){
-      watchList.innerHTML="No live matches.";
-      return;
-    }
-    d.response.forEach(m=>{
-      watchList.innerHTML+=`
-        <div class="matchItem">
-          ${m.teams.home.name} vs ${m.teams.away.name}
-          <button onclick="openMatch(${m.fixture.id})">WATCH</button>
-        </div>`;
-    });
-  });
+  menu.style.display="block";
 }
 
-/* OPEN MATCH */
-function openMatch(id){
-  watchList.style.display="none";
-  watchView.style.display="block";
-
-  clearInterval(matchInterval);
-  loadMatch(id);
-  matchInterval=setInterval(()=>loadMatch(id),15000);
-
-  startFake();
-}
-
-/* LOAD MATCH + STATS + GOAL */
-function loadMatch(id){
-  fetch("https://v3.football.api-sports.io/fixtures?id="+id,{
-    headers:{ "x-apisports-key":API_KEY }
-  })
-  .then(r=>r.json())
-  .then(d=>{
-    const m=d.response[0];
-
-    wvTeams.textContent =
-      m.teams.home.name+" vs "+m.teams.away.name;
-    wvScore.textContent =
-      m.goals.home+" - "+m.goals.away;
-    wvTime.textContent =
-      m.fixture.status.elapsed+"'";
-
-    if(lastHome!==null){
-      if(m.goals.home>lastHome || m.goals.away>lastAway){
-        showGoal();
-      }
-    }
-    lastHome=m.goals.home;
-    lastAway=m.goals.away;
-
-    fetch("https://v3.football.api-sports.io/fixtures/statistics?fixture="+id,{
-      headers:{ "x-apisports-key":API_KEY }
-    })
-    .then(r=>r.json())
-    .then(s=>{
-      const h=s.response[0].statistics;
-      const a=s.response[1].statistics;
-
-      const g=(arr,n)=>{
-        const o=arr.find(x=>x.type===n);
-        return o&&o.value?o.value:0;
-      };
-
-      wvStats.innerHTML=`
-        Possession: ${g(h,"Ball Possession")} - ${g(a,"Ball Possession")}<br>
-        Shots on target: ${g(h,"Shots on Goal")} - ${g(a,"Shots on Goal")}<br>
-        Corners: ${g(h,"Corner Kicks")} - ${g(a,"Corner Kicks")}<br>
-        Fouls: ${g(h,"Fouls")} - ${g(a,"Fouls")}
-      `;
-    });
-  });
-}
-
-/* GOAL POPUP */
-function showGoal(){
-  const g=document.getElementById("goalBox");
-  g.style.display="block";
-  setTimeout(()=>g.style.display="none",3000);
-}
-
-/* FAKE BALL */
-function startFake(){
-  const field=document.getElementById("field");
-  clearInterval(fakeInterval);
-
-  fakeInterval=setInterval(()=>{
-    field.querySelectorAll(".dot").forEach(d=>{
-      d.style.top=Math.random()*200+"px";
-      d.style.left=Math.random()*95+"%";
-    });
-    if(field.querySelectorAll(".dot").length<12){
-      const d=document.createElement("div");
-      d.className="dot";
-      field.appendChild(d);
-    }
-  },800);
+function play(url){
+  menu.style.display="none";
+  frame.style.display="block";
+  frame.src=url;
 }
 </script>
 <script async="async" data-cfasync="false" src="https://pl28271657.effectivegatecpm.com/7ce278eca43002f8c43475716f0e33ac/invoke.js"></script>
 <div id="container-7ce278eca43002f8c43475716f0e33ac"></div>
+  <script>
+  atOptions = {
+    'key' : '90e745df8b4e0b6a32d37aef2b9a5129',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/90e745df8b4e0b6a32d37aef2b9a5129/invoke.js"></script>
   <script src="https://pl28271677.effectivegatecpm.com/80/ad/57/80ad5725e11d3a76d1393f090a382411.js"></script>
 </body>
 </html>
