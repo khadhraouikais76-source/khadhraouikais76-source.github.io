@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Top Score football live</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="description" content="Live football scores updated in real time. Follow today’s matches, all major leagues, standings, and match stats in a fast, mobile-friendly interface.">
-
 <meta name="keywords" content="live football scores, football live, soccer live scores, match results, football matches today, live soccer">
-
 <meta name="robots" content="index, follow">
-</head>
+
 <style>
 body{
   margin:0;
   font-family:Arial;
   background:#eef2f7;
+  margin-top:70px; /* 15 صانتي */
 }
 
 /* HEADER */
@@ -42,6 +41,7 @@ header{
   border-radius:8px;
   color:#fff;
   background:#2563eb;
+  cursor:pointer;
 }
 
 .nav .live{
@@ -51,21 +51,22 @@ header{
 /* CONTENT */
 #content{
   padding:6px;
+  ; /* 15 صانتي */
 }
 
 /* IFRAME */
 iframe{
   width:100%;
-  height:400px;      /* قصير */
+  height:400px;
   border:none;
   border-radius:12px;
-  margin-bottom:6px; /* إشهار صغير */
+  margin-bottom:6px;
 }
 
-/* LIVE BOX (بدل iframe) */
+/* LIVE BOX */
 .live-box{
   width:100%;
-  height:300px;      /* نفس حجم الفرايم */
+  height:300px;
   border-radius:12px;
   background:#111;
   color:#fff;
@@ -106,35 +107,30 @@ iframe{
 <script>
 const content = document.getElementById("content");
 
-// ALL
 function loadAll(){
   content.innerHTML = `
     <iframe src="https://www.scorebat.com/embed/livescore/"></iframe>
   `;
 }
 
-// FRANCE
 function loadFrance(){
   content.innerHTML = `
     <iframe src="https://www.scorebat.com/embed/competition/france-ligue-1/"></iframe>
   `;
 }
 
-// ENGLAND
 function loadEngland(){
   content.innerHTML = `
     <iframe src="https://www.scorebat.com/embed/competition/england-premier-league/"></iframe>
   `;
 }
 
-// GERMANY
 function loadGermany(){
   content.innerHTML = `
     <iframe src="https://www.scorebat.com/embed/competition/germany-bundesliga/"></iframe>
   `;
 }
 
-// LIVE (إطار بدل iframe)
 function loadLive(){
   content.innerHTML = `
     <div class="live-box" onclick="openLive()">
@@ -143,7 +139,6 @@ function loadLive(){
   `;
 }
 
-// فتح اللايف
 function openLive(){
   window.open(
     "https://www.livescore.com/en/football/live/",
@@ -151,11 +146,16 @@ function openLive(){
   );
 }
 
-// تحميل اللايف افتراضي
+/* تحميل ALL افتراضي */
 window.onload = loadAll;
 </script>
-<script async="async" data-cfasync="false" src="https://pl28271657.effectivegatecpm.com/7ce278eca43002f8c43475716f0e33ac/invoke.js"></script>
+
+<!-- ADS -->
+<script async data-cfasync="false"
+src="https://pl28271657.effectivegatecpm.com/7ce278eca43002f8c43475716f0e33ac/invoke.js"></script>
 <div id="container-7ce278eca43002f8c43475716f0e33ac"></div>
-  <script src="https://pl28271677.effectivegatecpm.com/80/ad/57/80ad5725e11d3a76d1393f090a382411.js"></script>
+
+<script src="https://pl28271677.effectivegatecpm.com/80/ad/57/80ad5725e11d3a76d1393f090a382411.js"></script>
+
 </body>
 </html>
