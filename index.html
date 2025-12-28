@@ -6,56 +6,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body{margin:0;font-family:Arial;background:#f3f6fb}
-header{
-  background:#fff;
-  padding:10px;
-  text-align:center;
-  box-shadow:0 2px 6px rgba(0,0,0,.1)
-}
-h1{margin:5px;font-size:20px}
+header{background:#fff;padding:10px;box-shadow:0 2px 6px rgba(0,0,0,.1);text-align:center}
 
 .nav{
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  gap:6px;
+  gap:8px;
   max-width:520px;
-  margin:10px auto
+  margin:10px auto;
 }
 .nav button{
   border:none;
-  padding:8px;
+  padding:8px 5px;
   border-radius:8px;
   font-size:12px;
   font-weight:bold;
   color:#fff;
-  background:#2563eb
+  background:#2563eb;
 }
-.watchBtn{background:#22c55e}
-
-.container{max-width:900px;margin:auto;padding:10px}
+.liveBtn{background:#16a34a}
 
 iframe{
   width:100%;
-  height:520px;
+  height:65vh; /* 👈 نفس الحجم */
   border:none;
-  border-radius:12px;
-  background:#fff
-}
-
-#watchMenu{
-  display:none;
   background:#fff;
-  padding:10px;
-  border-radius:12px
 }
-
-.match{
-  padding:10px;
-  margin-bottom:8px;
-  background:#f1f5f9;
-  border-radius:8px;
+.ad{
+  height:90px;
+  background:#e5e7eb;
+  margin:10px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   font-weight:bold;
-  cursor:pointer
 }
 </style>
 </head>
@@ -63,74 +48,32 @@ iframe{
 <body>
 
 <header>
-<h1>Live Football</h1>
+<h3>Football Matches</h3>
 <div class="nav">
-  <button class="watchBtn" onclick="openWatch()">WATCH</button>
-  <button onclick="load('all')">All</button>
-  <button onclick="load('fr')">France</button>
-  <button onclick="load('eng')">England</button>
-  <button onclick="load('de')">Germany</button>
+  <button class="liveBtn" onclick="goLive()">LIVE</button>
+  <button onclick="loadFrame('https://www.scorebat.com/')">All</button>
+  <button onclick="loadFrame('https://www.scorebat.com/competition/england-premier-league/')">England</button>
+  <button onclick="loadFrame('https://www.scorebat.com/competition/france-ligue-1/')">France</button>
+  <button onclick="loadFrame('https://www.scorebat.com/competition/germany-bundesliga/')">Germany</button>
 </div>
 </header>
 
-<div class="container">
+<iframe id="frame"></iframe>
 
-<iframe id="frame" src="https://www.scorebat.com/embed/livescore/"></iframe>
-
-<div id="watchMenu">
-  <div class="match" onclick="play('https://www.scorebat.com/embed/competition/england-premier-league/')">
-    Premier League (Live)
-  </div>
-  <div class="match" onclick="play('https://www.scorebat.com/embed/competition/france-ligue-1/')">
-    Ligue 1 (Live)
-  </div>
-  <div class="match" onclick="play('https://www.scorebat.com/embed/competition/germany-bundesliga/')">
-    Bundesliga (Live)
-  </div>
-  <div class="match" onclick="play('https://www.scorebat.com/embed/livescore/')">
-    All Live Matches
-  </div>
-</div>
-
-</div>
-
-<script>
-const frame=document.getElementById("frame");
-const menu=document.getElementById("watchMenu");
-
-function load(c){
-  menu.style.display="none";
-  frame.style.display="block";
-
-  if(c==="all") frame.src="https://www.scorebat.com/embed/livescore/";
-  if(c==="fr") frame.src="https://www.scorebat.com/embed/competition/france-ligue-1/";
-  if(c==="eng") frame.src="https://www.scorebat.com/embed/competition/england-premier-league/";
-  if(c==="de") frame.src="https://www.scorebat.com/embed/competition/germany-bundesliga/";
-}
-
-function openWatch(){
-  frame.style.display="none";
-  menu.style.display="block";
-}
-
-function play(url){
-  menu.style.display="none";
-  frame.style.display="block";
-  frame.src=url;
-}
-</script>
 <script async="async" data-cfasync="false" src="https://pl28271657.effectivegatecpm.com/7ce278eca43002f8c43475716f0e33ac/invoke.js"></script>
 <div id="container-7ce278eca43002f8c43475716f0e33ac"></div>
-  <script>
-  atOptions = {
-    'key' : '90e745df8b4e0b6a32d37aef2b9a5129',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
+
+<script>
+function loadFrame(url){
+  document.getElementById("frame").src = url;
+}
+function goLive(){
+  window.location.href = "live.html";
+}
+window.onload = () => {
+  loadFrame("https://www.scorebat.com/");
+};
 </script>
-<script src="https://www.highperformanceformat.com/90e745df8b4e0b6a32d37aef2b9a5129/invoke.js"></script>
-  <script src="https://pl28271677.effectivegatecpm.com/80/ad/57/80ad5725e11d3a76d1393f090a382411.js"></script>
+<script src="https://pl28271677.effectivegatecpm.com/80/ad/57/80ad5725e11d3a76d1393f090a382411.js"></script>
 </body>
 </html>
