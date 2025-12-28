@@ -2,45 +2,81 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Top Score</title>
+<title>Football Live</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body{margin:0;font-family:Arial;background:#f3f6fb}
-header{background:#fff;padding:10px;box-shadow:0 2px 6px rgba(0,0,0,.1);text-align:center}
 
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#eef2f7;
+}
+
+/* HEADER */
+header{
+  background:#fff;
+  padding:10px;
+  text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+
+/* NAV */
 .nav{
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  gap:8px;
-  max-width:520px;
-  margin:10px auto;
+  gap:6px;
+  padding:8px;
 }
+
 .nav button{
   border:none;
-  padding:8px 5px;
-  border-radius:8px;
+  padding:8px 4px;
   font-size:12px;
   font-weight:bold;
+  border-radius:8px;
   color:#fff;
   background:#2563eb;
 }
-.liveBtn{background:#16a34a}
 
+.nav .live{
+  background:#dc2626;
+}
+
+/* CONTENT */
+#content{
+  padding:6px;
+}
+
+/* IFRAME */
 iframe{
   width:100%;
-  height:65vh; /* 👈 نفس الحجم */
+  height:400px;      /* قصير */
   border:none;
-  background:#fff;
+  border-radius:12px;
+  margin-bottom:6px; /* إشهار صغير */
 }
-.ad{
-  height:90px;
-  background:#e5e7eb;
-  margin:10px;
-  border-radius:10px;
+
+/* LIVE BOX (بدل iframe) */
+.live-box{
+  width:100%;
+  height:300px;      /* نفس حجم الفرايم */
+  border-radius:12px;
+  background:#111;
+  color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
+  text-align:center;
+  font-size:18px;
   font-weight:bold;
+  cursor:pointer;
+  margin-bottom:6px;
+}
+
+.live-box span{
+  background:#dc2626;
+  padding:12px 18px;
+  border-radius:10px;
 }
 </style>
 </head>
@@ -48,32 +84,72 @@ iframe{
 <body>
 
 <header>
-<h3>Football Matches</h3>
-<div class="nav">
-  <button class="liveBtn" onclick="goLive()">LIVE</button>
-  <button onclick="loadFrame('https://www.scorebat.com/')">All</button>
-  <button onclick="loadFrame('https://www.scorebat.com/competition/england-premier-league/')">England</button>
-  <button onclick="loadFrame('https://www.scorebat.com/competition/france-ligue-1/')">France</button>
-  <button onclick="loadFrame('https://www.scorebat.com/competition/germany-bundesliga/')">Germany</button>
-</div>
+  <h3>LIVE FOOTBALL</h3>
 </header>
 
-<iframe id="frame"></iframe>
+<div class="nav">
+  <button onclick="loadAll()">ALL</button>
+  <button onclick="loadFrance()">FRANCE</button>
+  <button onclick="loadEngland()">ENGLAND</button>
+  <button onclick="loadGermany()">GERMANY</button>
+  <button class="live" onclick="loadLive()">LIVE</button>
+</div>
 
-<script async="async" data-cfasync="false" src="https://pl28271657.effectivegatecpm.com/7ce278eca43002f8c43475716f0e33ac/invoke.js"></script>
-<div id="container-7ce278eca43002f8c43475716f0e33ac"></div>
+<div id="content"></div>
 
 <script>
-function loadFrame(url){
-  document.getElementById("frame").src = url;
+const content = document.getElementById("content");
+
+// ALL
+function loadAll(){
+  content.innerHTML = `
+    <iframe src="https://www.scorebat.com/embed/livescore/"></iframe>
+  `;
 }
-function goLive(){
-  window.location.href = "live.html";
+
+// FRANCE
+function loadFrance(){
+  content.innerHTML = `
+    <iframe src="https://www.scorebat.com/embed/competition/france-ligue-1/"></iframe>
+  `;
 }
-window.onload = () => {
-  loadFrame("https://www.scorebat.com/");
-};
+
+// ENGLAND
+function loadEngland(){
+  content.innerHTML = `
+    <iframe src="https://www.scorebat.com/embed/competition/england-premier-league/"></iframe>
+  `;
+}
+
+// GERMANY
+function loadGermany(){
+  content.innerHTML = `
+    <iframe src="https://www.scorebat.com/embed/competition/germany-bundesliga/"></iframe>
+  `;
+}
+
+// LIVE (إطار بدل iframe)
+function loadLive(){
+  content.innerHTML = `
+    <div class="live-box" onclick="openLive()">
+      <span>🔴 WATCH LIVE MATCHES</span>
+    </div>
+  `;
+}
+
+// فتح اللايف
+function openLive(){
+  window.open(
+    "https://www.livescore.com/en/football/live/",
+    "_blank"
+  );
+}
+
+// تحميل اللايف افتراضي
+window.onload = loadAll;
 </script>
-<script src="https://pl28271677.effectivegatecpm.com/80/ad/57/80ad5725e11d3a76d1393f090a382411.js"></script>
+<script async="async" data-cfasync="false" src="https://pl28271657.effectivegatecpm.com/7ce278eca43002f8c43475716f0e33ac/invoke.js"></script>
+<div id="container-7ce278eca43002f8c43475716f0e33ac"></div>
+  <script src="https://pl28271677.effectivegatecpm.com/80/ad/57/80ad5725e11d3a76d1393f090a382411.js"></script>
 </body>
 </html>
