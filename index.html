@@ -8,63 +8,86 @@
 <meta name="description" content="Live football scores updated in real time. Follow today’s matches, all major leagues, standings, and match stats in a fast, mobile-friendly interface.">
 <meta name="keywords" content="live football scores, football live, soccer live scores, match results, football matches today, live soccer">
 <meta name="robots" content="index, follow">
-
 <style>
-/* إعلان فوق */
-.ad-safe-top{
-  height:120px;
-  width:100%;
+body{
+  margin:0;
+  font-family:'Arial', sans-serif;
+  background:linear-gradient(180deg,#f5f6fa,#e6e8f0);
+  margin-top:100px; /* 15 صانتي */
+  color:#111;
 }
 
 /* HEADER */
 header{
-  position:fixed;
-  top:120px;          /* تحت الإعلان مباشرة */
-  left:0;
-  width:100%;
-  background:#020617;
-  padding:10px 6px;
-  z-index:1000;
+background:#BAC5E3;
+padding:10px;
+text-align:center;
+box-shadow:0 2px 6px rgba(0,0,0,.1);
 }
 
-/* NAV (الأزرار) */
+/* NAV */
 .nav{
-  display:flex;
-  gap:6px;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:6px;
+padding:8px;
 }
 
 .nav button{
-  flex:1;
-  padding:10px 4px;
-  font-size:12px;
-  font-weight:bold;
-  border:none;
-  border-radius:10px;
-  color:#fff;
-  background:#2563eb;
+border:none;
+padding:8px 4px;
+font-size:12px;
+font-weight:bold;
+border-radius:8px;
+color:#fff;
+background:#2563eb;
+cursor:pointer;
 }
 
-/* المحتوى */
+.nav .live{
+background:#dc2626;
+}
+
+/* CONTENT /
 #content{
-  margin-top:220px;   /* إعلان + هيدر */
-  padding:8px;
+padding:6px;
+; / 15 صانتي */
 }
 
-/* إعلان لوطى */
-.ad-safe-bottom{
-  height:90px;
-  width:100%;
-}
-
-/* iframe كبير */
+/* IFRAME */
 iframe{
-  width:100%;
-  height:520px;
-  border:none;
-  border-radius:16px;
-  background:#000;
+width:100%;
+height:450px;
+border:none;
+border-radius:12px;
+margin-bottom:6px;
+}
+
+/* LIVE BOX */
+.live-box{
+width:100%;
+height:300px;
+border-radius:12px;
+background:#111;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+margin-bottom:6px;
+}
+
+.live-box span{
+background:#dc2626;
+padding:12px 18px;
+border-radius:10px;
 }
 </style>
+
+</head>
 </head>
 
 <body>
