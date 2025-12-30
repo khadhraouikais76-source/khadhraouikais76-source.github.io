@@ -143,6 +143,11 @@ function loadLive(){
   }, 400);
 }
 /* تحميل ALL افتراضي */
+  document.addEventListener("visibilitychange", function () {
+  if (!document.hidden) {
+    loadAll();
+  }
+});
 window.onload = loadAll;
 </script>
 
