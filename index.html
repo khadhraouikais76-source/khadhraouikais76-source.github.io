@@ -14,7 +14,7 @@ body{
   margin:0;
   font-family:Arial;
   background:#eef2f7;
-  margin-top:70px; /* 15 صانتي */
+  margin-top:70px;
 }
 
 /* HEADER */
@@ -48,10 +48,14 @@ header{
   background:#dc2626;
 }
 
+/* ACTIVE */
+.nav button.active{
+  background:#16a34a !important;
+}
+
 /* CONTENT */
 #content{
   padding:6px;
-  ; /* 15 صانتي */
 }
 
 /* IFRAME */
@@ -95,11 +99,12 @@ iframe{
 </header>
 
 <div class="nav">
-  <button onclick="loadAll()">ALL</button>
-  <button onclick="loadFrance()">FRANCE</button>
-  <button onclick="loadEngland()">ENGLAND</button>
-  <button onclick="loadGermany()">GERMANY</button>
-  <button class="live" onclick="loadLive()">LIVE</button>
+  <!-- ⭐ تعديل onclick فقط -->
+  <button onclick="setActive(this); loadAll()">ALL</button>
+  <button onclick="setActive(this); loadFrance()">FRANCE</button>
+  <button onclick="setActive(this); loadEngland()">ENGLAND</button>
+  <button onclick="setActive(this); loadGermany()">GERMANY</button>
+  <button class="live" onclick="setActive(this); loadLive()">LIVE</button>
 </div>
 
 <div id="content"></div>
@@ -137,21 +142,33 @@ function loadLive(){
       <span>🔴 OPENING LIVE…</span>
     </div>
   `;
-
   setTimeout(()=>{
     window.location.href = "https://www.livescore.com/en/football/live/";
   }, 400);
 }
-/* تحميل ALL افتراضي */
-  document.addEventListener("visibilitychange", function () {
+
+/* ⭐ عند الرجوع من الموقع الخارجي */
+document.addEventListener("visibilitychange", function () {
   if (!document.hidden) {
     loadAll();
+    setActive(document.querySelector(".nav button")); // ALL
   }
 });
-window.onload = loadAll;
-</script>
 
-<!-- ADS -->
+/* ⭐ تفعيل ALL عند التحميل */
+window.onload = function(){
+  loadAll();
+  setActive(document.querySelector(".nav button"));
+};
+
+/* ⭐ دالة التفعيل */
+function setActive(btn){
+  document.querySelectorAll(".nav button").forEach(b=>{
+    b.classList.remove("active");
+  });
+  btn.classList.add("active");
+}
+</script>
 
 </body>
 </html>
