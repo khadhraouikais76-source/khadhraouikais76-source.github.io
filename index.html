@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,12 +11,12 @@
 <meta name="robots" content="index, follow">
 
 <style>
+/* BODY */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   margin-top: 70px;
   min-height: 100vh;
-
   background: linear-gradient(
     135deg,
     #0f2027,
@@ -28,16 +29,15 @@ body {
 
 /* HEADER */
 header {
-  background: linear-gradient(
-    135deg,
-    #00c6ff,
-    #0072ff
-  );
+  background: linear-gradient(135deg,#00c6ff,#0072ff);
   padding: 12px;
   text-align: center;
   color: #fff;
-
   box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  position: fixed;
+  top:0;
+  width:100%;
+  z-index:1000;
 }
 
 /* NAV */
@@ -73,13 +73,28 @@ header {
   padding:6px;
 }
 
+/* IFRAME WRAPPER */
+.iframe-box{
+  padding:6px;
+  border-radius:14px;
+  margin-bottom:8px;
+  background: linear-gradient(
+    135deg,
+    #0ea5e9,
+    #2563eb,
+    #22c55e
+  );
+  box-shadow:0 8px 24px rgba(0,0,0,.35);
+  animation: glow 1s ease-in-out;
+}
+
 /* IFRAME */
-iframe{
+.iframe-box iframe{
   width:100%;
   height:480px;
   border:none;
-  border-radius:12px;
-  margin-bottom:6px;
+  border-radius:10px;
+  background:transparent;
 }
 
 /* LIVE BOX */
@@ -104,6 +119,12 @@ iframe{
   padding:12px 18px;
   border-radius:10px;
 }
+
+/* ANIMATION */
+@keyframes glow{
+  from{box-shadow:0 0 0 rgba(0,0,0,0);}
+  to{box-shadow:0 8px 24px rgba(0,0,0,.35);}
+}
 </style>
 </head>
 
@@ -114,7 +135,6 @@ iframe{
 </header>
 
 <div class="nav">
-  <!-- ⭐ تعديل onclick فقط -->
   <button onclick="setActive(this); loadAll()">ALL</button>
   <button onclick="setActive(this); loadFrance()">FRANCE</button>
   <button onclick="setActive(this); loadEngland()">ENGLAND</button>
@@ -129,25 +149,33 @@ const content = document.getElementById("content");
 
 function loadAll(){
   content.innerHTML = `
-    <iframe src="https://www.scorebat.com/embed/livescore/"></iframe>
+    <div class="iframe-box">
+      <iframe src="https://www.scorebat.com/embed/livescore/"></iframe>
+    </div>
   `;
 }
 
 function loadFrance(){
   content.innerHTML = `
-    <iframe src="https://www.scorebat.com/embed/competition/france-ligue-1/"></iframe>
+    <div class="iframe-box">
+      <iframe src="https://www.scorebat.com/embed/competition/france-ligue-1/"></iframe>
+    </div>
   `;
 }
 
 function loadEngland(){
   content.innerHTML = `
-    <iframe src="https://www.scorebat.com/embed/competition/england-premier-league/"></iframe>
+    <div class="iframe-box">
+      <iframe src="https://www.scorebat.com/embed/competition/england-premier-league/"></iframe>
+    </div>
   `;
 }
 
 function loadGermany(){
   content.innerHTML = `
-    <iframe src="https://www.scorebat.com/embed/competition/germany-bundesliga/"></iframe>
+    <div class="iframe-box">
+      <iframe src="https://www.scorebat.com/embed/competition/germany-bundesliga/"></iframe>
+    </div>
   `;
 }
 
@@ -162,21 +190,21 @@ function loadLive(){
   }, 400);
 }
 
-/* ⭐ عند الرجوع من الموقع الخارجي */
+/* عند الرجوع من موقع خارجي */
 document.addEventListener("visibilitychange", function () {
   if (!document.hidden) {
     loadAll();
-    setActive(document.querySelector(".nav button")); // ALL
+    setActive(document.querySelector(".nav button"));
   }
 });
 
-/* ⭐ تفعيل ALL عند التحميل */
+/* تحميل ALL افتراضيًا */
 window.onload = function(){
   loadAll();
   setActive(document.querySelector(".nav button"));
 };
 
-/* ⭐ دالة التفعيل */
+/* زر نشط */
 function setActive(btn){
   document.querySelectorAll(".nav button").forEach(b=>{
     b.classList.remove("active");
