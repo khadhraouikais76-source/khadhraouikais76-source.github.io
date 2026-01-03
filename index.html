@@ -1,171 +1,241 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<title>Top Score football live</title>  
-<meta name="viewport" content="width=device-width, initial-scale=1">  <meta name="description" content="Live football scores updated in real time. Follow today’s matches, all major leagues, standings, and match stats in a fast, mobile-friendly interface.">  
-<meta name="keywords" content="live football scores, football live, soccer live scores, match results, football matches today, live soccer">  
-<meta name="robots" content="index, follow">  <style>  
-body {  
-  margin: 0;  
-  font-family: Arial, sans-serif;  
-  margin-top: 70px;  
-  min-height: 100vh;  
-  
-  background: linear-gradient(  
-    135deg,  
-    #0f2027,  
-    #203a43,  
-    #2c5364,  
-    #00c6ff,  
-    #00f2fe  
-  );  
-}  
-  
-/* HEADER */  
-header {  
-  background: linear-gradient(  
-    135deg,  
-    #00c6ff,  
-    #0072ff  
-  );  
-  padding: 12px;  
-  text-align: center;  
-  color: #fff;  
-  
-  box-shadow: 0 4px 12px rgba(0,0,0,.25);  
-}  
-  
-/* NAV */  
-.nav{  
-  display:grid;  
-  grid-template-columns:repeat(5,1fr);  
-  gap:6px;  
-  padding:8px;  
-}  
-  
-.nav button{  
-  border:none;  
-  padding:8px 4px;  
-  font-size:12px;  
-  font-weight:bold;  
-  border-radius:8px;  
-  color:#fff;  
-  background:#2563eb;  
-  cursor:pointer;  
-}  
-  
-.nav .live{  
-  background:#dc2626;  
-}  
-  
-/* ACTIVE */  
-.nav button.active{  
-  background:#16a34a !important;  
-}  
-  
-/* CONTENT */  
-#content{  
-  padding:6px;  
-}  
-  
-/* IFRAME */  
-iframe{  
-  width:100%;  
-  height:480px;  
-  border:none;  
-  border-radius:12px;  
-  margin-bottom:6px;  
-}  
-  
-/* LIVE BOX */  
-.live-box{  
-  width:100%;  
-  height:300px;  
-  border-radius:12px;  
-  background:#111;  
-  color:#fff;  
-  display:flex;  
-  align-items:center;  
-  justify-content:center;  
-  text-align:center;  
-  font-size:18px;  
-  font-weight:bold;  
-  cursor:pointer;  
-  margin-bottom:6px;  
-}  
-  
-.live-box span{  
-  background:#dc2626;  
-  padding:12px 18px;  
-  border-radius:10px;  
-}  
-</style>  </head>  <body>  <header>  
-  <h3>TOP SCORE</h3>  
-</header>  <div class="nav">  
-  <!-- ⭐ تعديل onclick فقط -->  
-  <button onclick="setActive(this); loadAll()">ALL</button>  
-  <button onclick="setActive(this); loadFrance()">FRANCE</button>  
-  <button onclick="setActive(this); loadEngland()">ENGLAND</button>  
-  <button onclick="setActive(this); loadGermany()">GERMANY</button>  
-  <button class="live" onclick="setActive(this); loadLive()">LIVE</button>  
-</div>  <div id="content"></div>  <script>  
-const content = document.getElementById("content");  
-  
-function loadAll(){  
-  content.innerHTML = `  
-    <iframe src="https://www.scorebat.com/embed/livescore/"></iframe>  
-  `;  
-}  
-  
-function loadFrance(){  
-  content.innerHTML = `  
-    <iframe src="https://www.scorebat.com/embed/competition/france-ligue-1/"></iframe>  
-  `;  
-}  
-  
-function loadEngland(){  
-  content.innerHTML = `  
-    <iframe src="https://www.scorebat.com/embed/competition/england-premier-league/"></iframe>  
-  `;  
-}  
-  
-function loadGermany(){  
-  content.innerHTML = `  
-    <iframe src="https://www.scorebat.com/embed/competition/germany-bundesliga/"></iframe>  
-  `;  
-}  
-  
-function loadLive(){  
-  content.innerHTML = `  
-    <div class="live-box">  
-      <span>🔴 OPENING LIVE…</span>  
-    </div>  
-  `;  
-  setTimeout(()=>{  
-    window.location.href = "https://www.livescore.com/en/football/live/";  
-  }, 400);  
-}  
-  
-/* ⭐ عند الرجوع من الموقع الخارجي */  
-document.addEventListener("visibilitychange", function () {  
-  if (!document.hidden) {  
-    loadAll();  
-    setActive(document.querySelector(".nav button")); // ALL  
-  }  
-});  
-  
-/* ⭐ تفعيل ALL عند التحميل */  
-window.onload = function(){  
-  loadAll();  
-  setActive(document.querySelector(".nav button"));  
-};  
-  
-/* ⭐ دالة التفعيل */  
-function setActive(btn){  
-  document.querySelectorAll(".nav button").forEach(b=>{  
-    b.classList.remove("active");  
-  });  
-  btn.classList.add("active");  
-}  
-</script>  </body>  
-</html> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Top Score football live</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="Live football scores updated in real time. Follow today’s matches, all major leagues, standings, and match stats in a fast, mobile-friendly interface.">
+<meta name="keywords" content="live football scores, football live, soccer live scores, match results, football matches today, live soccer">
+<meta name="robots" content="index, follow">
+
+<style>
+  .ad-safe-top{
+  width:100%;
+  min-height:60px;   /* ارتفاع آمن */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+   /* اختياري */
+  overflow:hidden;
+}
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Segoe UI',Arial,sans-serif;
+  min-height:100vh;
+  margin-top:80px;
+  color:#fff;
+
+  /* SAME CRYPTOSTAT BACKGROUND */
+  background: linear-gradient(135deg,#1f1c2c,#928dab);
+}
+
+/* HEADER */
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:10;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+
+  background:rgba(0,0,0,0.35);
+  backdrop-filter: blur(12px);
+  border-bottom:2px solid rgba(255,255,255,0.2);
+}
+
+header h3{
+  font-size:2.2rem;
+  font-weight:900;
+
+  background: linear-gradient(90deg,#ff6a00,#ee0979,#00f260);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* NAV */
+.nav{
+  display:flex;
+  gap:10px;
+  padding:15px;
+  max-width:900px;
+  margin:0 auto;
+}
+
+.nav button{
+  flex:1;
+  border:none;
+  padding:10px 6px;
+  font-size:0.9rem;
+  font-weight:700;
+  border-radius:10px;
+  cursor:pointer;
+  color:#fff;
+
+  background:rgba(255,255,255,0.12);
+  transition:0.3s;
+}
+
+.nav button:hover{
+  transform:scale(1.05);
+  background: linear-gradient(90deg,#ff6a00,#ee0979,#00f260);
+}
+
+/* LIVE BUTTON */
+.nav .live{
+  background:#dc2626;
+}
+
+/* ACTIVE */
+.nav button.active{
+  background: linear-gradient(90deg,#ff6a00,#ee0979,#00f260) !important;
+}
+
+/* CONTENT */
+#content{
+  padding:15px;
+  max-width:1100px;
+  margin:0 auto;
+}
+
+/* IFRAME */
+iframe{
+  width:100%;
+  height:480px;
+  border:none;
+  border-radius:15px;
+  margin-bottom:15px;
+
+  background:#000;
+  box-shadow:0 6px 18px rgba(0,0,0,0.5);
+}
+
+/* LIVE BOX */
+.live-box{
+  width:100%;
+  height:300px;
+  border-radius:15px;
+
+  background: linear-gradient(135deg,#1f1c2c,#4b0075);
+  box-shadow:0 6px 18px rgba(0,0,0,0.6);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  font-size:1.3rem;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.live-box span{
+  background: linear-gradient(90deg,#ff6a00,#ee0979);
+  padding:14px 22px;
+  border-radius:12px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  header h3{font-size:1.8rem;}
+  .nav button{font-size:0.8rem;padding:8px;}
+}
+
+@media(max-width:480px){
+  .nav{flex-direction:column;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <h3>TOP SCORE</h3>
+</header>
+  <div class="ad-safe-top">
+	</div>
+	
+<div class="nav">
+  <button onclick="setActive(this); loadAll()">ALL</button>
+  <button onclick="setActive(this); loadFrance()">FRANCE</button>
+  <button onclick="setActive(this); loadEngland()">ENGLAND</button>
+  <button onclick="setActive(this); loadGermany()">GERMANY</button>
+  <button class="live" onclick="setActive(this); loadLive()">LIVE</button>
+</div>
+
+<div id="content"></div>
+
+<script>
+const content = document.getElementById("content");
+
+function loadAll(){
+  content.innerHTML = `
+    <iframe src="https://www.scorebat.com/embed/livescore/"></iframe>
+  `;
+}
+
+function loadFrance(){
+  content.innerHTML = `
+    <iframe src="https://www.scorebat.com/embed/competition/france-ligue-1/"></iframe>
+  `;
+}
+
+function loadEngland(){
+  content.innerHTML = `
+    <iframe src="https://www.scorebat.com/embed/competition/england-premier-league/"></iframe>
+  `;
+}
+
+function loadGermany(){
+  content.innerHTML = `
+    <iframe src="https://www.scorebat.com/embed/competition/germany-bundesliga/"></iframe>
+  `;
+}
+
+function loadLive(){
+  content.innerHTML = `
+    <div class="live-box">
+      <span>🔴 OPENING LIVE…</span>
+    </div>
+  `;
+  setTimeout(()=>{
+    window.location.href = "https://www.livescore.com/en/football/live/";
+  }, 400);
+}
+
+/* BACK FROM EXTERNAL */
+document.addEventListener("visibilitychange", function () {
+  if (!document.hidden) {
+    loadAll();
+    setActive(document.querySelector(".nav button"));
+  }
+});
+
+/* ON LOAD */
+window.onload = function(){
+  loadAll();
+  setActive(document.querySelector(".nav button"));
+};
+
+function setActive(btn){
+  document.querySelectorAll(".nav button").forEach(b=>{
+    b.classList.remove("active");
+  });
+  btn.classList.add("active");
+}
+</script>
+
+</body>
+</html>
