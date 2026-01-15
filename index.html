@@ -155,6 +155,13 @@ iframe{
 @media(max-width:480px){
   .nav{flex-direction:column;}
 }
+  .base-ad {
+  width: 320px;        /* عرض العنصر */
+  height: 100px;        /* ارتفاع العنصر */
+  margin: 10px auto;   /* مركزي على الصفحة */
+   /* ضع نفس لون خلفية موقعك */
+  border-radius: 5px;         /* حواف بسيطة */
+}
 </style>
 </head>
 
@@ -164,7 +171,8 @@ iframe{
 
   <h3>TOP SCORE</h3>
 </header>
- 
+ <!-- مساحة أساسية للإعلان -->
+<div class="base-ad"></div>
 <div class="nav">
   <button onclick="setActive(this); loadAll()">ALL</button>
   <button onclick="setActive(this); loadFrance()">FRANCE</button>
