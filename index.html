@@ -11,16 +11,7 @@
 <meta name="robots" content="index, follow">
 
 <style>
-  .ad-safe-top{
-  width:100%;
-  min-height:60px;   /* ارتفاع آمن */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-   /* اختياري */
-  overflow:hidden;
-}
-/* RESET */
+  /* RESET */
 *{
   margin:0;
   padding:0;
@@ -31,10 +22,18 @@ body{
   font-family:'Segoe UI',Arial,sans-serif;
   min-height:100vh;
   margin-top:80px;
-  ;
 
-  /* SAME CRYPTOSTAT BACKGROUND */
-  background: linear-gradient(135deg,#1f1c2c,#928dab);
+  /* خلفية فاتحة وزاهية بتدرج قوي */
+  background: linear-gradient(135deg, #00c6ff, #0072ff, #00ffa1, #faff00);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite; /* تأثير حركة ناعمة */
+}
+
+/* حركة التدرج */
+@keyframes gradientBG {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
 }
 
 /* HEADER */
@@ -44,52 +43,59 @@ header{
   left:0;
   width:100%;
   z-index:10;
-
   display:flex;
   align-items:center;
   justify-content:center;
   padding:20px;
 
-  background:rgba(0,0,0,0.35);
-  backdrop-filter: blur(12px);
-  border-bottom:2px solid rgba(255,255,255,0.2);
+  /* خلفية فاتحة وزاهية */
+  background: linear-gradient(90deg, #00f260, #0575e6, #00c6ff);
+  color:#fff;
+  box-shadow:0 4px 15px rgba(0,0,0,0.2);
+  border-bottom:2px solid rgba(255,255,255,0.3);
+  backdrop-filter: blur(10px); /* لإضفاء لمسة شفافة أنيقة */
 }
 
 header h3{
-  font-size:2.2rem;
+  font-size:2rem;
   font-weight:900;
-
-  background: linear-gradient(90deg,#ff6a00,#ee0979,#00f260);
+  background: linear-gradient(90deg, #ffb347, #ffcc33, #00ffe7);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.25);
 }
 
-/* NAV */
+/* NAVIGATION */
 .nav{
   display:flex;
+  flex-wrap:wrap; /* يسمح بالصفين */
   gap:10px;
-  padding:15px;
+  padding:10px 5px;
   max-width:900px;
-  margin:0 auto;
+  margin:40px auto 10px auto; /* مباعدة عن الهيدر والمحتوى */
+  justify-content:center;
 }
 
 .nav button{
-  flex:1;
+  flex: 0 1 120px; /* صغير الحجم، يمكن أن يضغط أو يتوسع */
+  min-width:100px;
   border:none;
-  padding:10px 6px;
-  font-size:0.9rem;
+  padding:8px 6px; /* أصغر حجم */
+  font-size:0.85rem;
   font-weight:700;
   border-radius:10px;
   cursor:pointer;
   color:#fff;
 
   background:rgba(255,255,255,0.12);
-  transition:0.3s;
+  transition:all 0.3s ease;
+  box-shadow:0 3px 10px rgba(0,0,0,0.3);
 }
 
 .nav button:hover{
-  transform:scale(1.05);
+  transform:translateY(-2px) scale(1.05);
   background: linear-gradient(90deg,#ff6a00,#ee0979,#00f260);
+  box-shadow:0 6px 14px rgba(0,0,0,0.4);
 }
 
 /* LIVE BUTTON */
@@ -97,12 +103,13 @@ header h3{
   background:#dc2626;
 }
 
-/* ACTIVE */
+/* ACTIVE BUTTON */
 .nav button.active{
   background: linear-gradient(90deg,#ff6a00,#ee0979,#00f260) !important;
+  box-shadow:0 4px 16px rgba(0,0,0,0.5);
 }
 
-/* CONTENT */
+/* CONTENT AREA */
 #content{
   padding:15px;
   max-width:1100px;
@@ -112,21 +119,25 @@ header h3{
 /* IFRAME */
 iframe{
   width:100%;
-  height:480px;
+  height:700px;
   border:none;
   border-radius:15px;
-  margin-bottom:15px;
-
+  margin-bottom:5px;
   background:#000;
   box-shadow:0 6px 18px rgba(0,0,0,0.5);
+  transition:transform 0.3s ease;
+}
+
+iframe:hover{
+  transform:scale(1.01);
 }
 
 /* LIVE BOX */
 .live-box{
   width:100%;
+  max-width:600px;
   height:300px;
   border-radius:15px;
-
   background: linear-gradient(135deg,#1f1c2c,#4b0075);
   box-shadow:0 6px 18px rgba(0,0,0,0.6);
 
@@ -138,29 +149,47 @@ iframe{
   font-size:1.3rem;
   font-weight:800;
   cursor:pointer;
+  margin:0 auto;
 }
 
 .live-box span{
   background: linear-gradient(90deg,#ff6a00,#ee0979);
-  padding:14px 22px;
+  padding:12px 20px;
   border-radius:12px;
+  color:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* BASE AD */
+.base-ad {
+  width: 320px;
+  
 }
 
 /* RESPONSIVE */
 @media(max-width:768px){
   header h3{font-size:1.8rem;}
-  .nav button{font-size:0.8rem;padding:8px;}
+  .nav button{
+    font-size:0.8rem;
+    padding:7px 5px;
+    flex:0 1 45%; /* يظهر في صفين */
+  }
 }
 
 @media(max-width:480px){
-  .nav{flex-direction:column;}
-}
-  .base-ad {
-  width: 320px;        /* عرض العنصر */
-  height: 80px;        /* ارتفاع العنصر */
-  margin: 10px auto;   /* مركزي على الصفحة */
-   /* ضع نفس لون خلفية موقعك */
-  border-radius: 5px;         /* حواف بسيطة */
+  .nav{
+    flex-direction:row;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:center;
+  }
+  .nav button{
+    flex:0 1 48%; /* صفين تقريبًا */
+    font-size:0.75rem;
+    padding:6px 5px;
+  }
+  iframe{height:350px;}
+  .live-box{height:250px;font-size:1.1rem;}
 }
 </style>
 </head>
@@ -172,7 +201,8 @@ iframe{
   <h3>TOP SCORE</h3>
 </header>
  <!-- مساحة أساسية للإعلان -->
-<div class="base-ad"></div>
+  <div class="base-ad"></div>
+
 <div class="nav">
   <button onclick="setActive(this); loadAll()">ALL</button>
   <button onclick="setActive(this); loadFrance()">FRANCE</button>
