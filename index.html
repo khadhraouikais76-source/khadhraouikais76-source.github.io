@@ -200,7 +200,7 @@ iframe:hover{
 
   <h3>TOP SCORE</h3>
 </header>
-  <div id="adsterra-ad" style="display:none;">
+  <div id="adsterra-ad1" style="display:none;">
   <!-- كود إعلان Adsterra هنا -->
     <script>
   atOptions = {
@@ -291,7 +291,15 @@ function setActive(btn){
 <div id="container-7ce278eca43002f8c43475716f0e33ac"></div>
   
 </div>
-
+<script>
+  // إظهار الإعلان بعد 30 ثانية
+  setTimeout(function () {
+    var ad = document.getElementById("adsterra-ad","adsterra-ad1");
+    if (ad) {
+      ad.style.display = "block";
+    }
+  }, 30000); // 30 ثانية
+</script>
 </script>
 </body>
 </html>
