@@ -200,6 +200,18 @@ iframe:hover{
 
   <h3>TOP SCORE</h3>
 </header>
+  <div id="adsterra-ad" style="display:none;">
+  <!-- كود إعلان Adsterra هنا -->
+    <script>
+  atOptions = {
+    'key' : '90e745df8b4e0b6a32d37aef2b9a5129',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/90e745df8b4e0b6a32d37aef2b9a5129/invoke.js"></script>
  <!-- مساحة أساسية للإعلان -->
   <div class="base-ad"></div>
 
@@ -279,36 +291,7 @@ function setActive(btn){
 <div id="container-7ce278eca43002f8c43475716f0e33ac"></div>
   
 </div>
-<script>
-  // إخفاء إعلانات Native / Banner عند الفتح
-  document.addEventListener("DOMContentLoaded", function () {
-    var ad = document.getElementById("adsterra-ad");
-    if (ad) {
-      ad.style.display = "none";
-    }
-  });
 
-  // بعد 30 ثانية: إظهار Native + تحميل Social Bar
-  setTimeout(function () {
-
-    // 1️⃣ إظهار Native / Banner
-    var ad = document.getElementById("adsterra-ad");
-    if (ad) {
-      ad.style.display = "block";
-    }
-
-    // 2️⃣ تحميل Social Bar مرة واحدة فقط
-    if (!window.adsterraSocialLoaded) {
-      window.adsterraSocialLoaded = true;
-
-      var s = document.createElement("script");
-      s.async = true;
-      s.src = "https://pl28271677.effectivegatecpm.com/80/ad/57/80ad5725e11d3a76d1393f090a382411.js";
-      document.body.appendChild(s);
-    }
-
-  }, 30000); // 30 ثانية
-</script>
 </script>
 </body>
 </html>
