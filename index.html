@@ -1,294 +1,109 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Top Score football live</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<title>Top Score football live</title>  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<meta name="description" content="Live football scores updated in real time. Follow today’s matches, all major leagues, standings, and match stats in a fast, mobile-friendly interface.">  
+<meta name="keywords" content="live football scores, football live, soccer live scores, match results, football matches today, live soccer">  
+<meta name="robots" content="index, follow">  
+<style>  
+/* RESET */  
+*{ margin:0; padding:0; box-sizing:border-box; }  
 
-<meta name="description" content="Live football scores updated in real time. Follow today’s matches, all major leagues, standings, and match stats in a fast, mobile-friendly interface.">
-<meta name="keywords" content="live football scores, football live, soccer live scores, match results, football matches today, live soccer">
-<meta name="robots" content="index, follow">
+body{  
+  font-family:'Segoe UI',Arial,sans-serif;  
+  min-height:100vh;  
+  margin-top:80px;  
+  background: linear-gradient(135deg, #00c6ff, #0072ff, #00ffa1, #faff00);  
+  background-size: 400% 400%;  
+  animation: gradientBG 15s ease infinite;  
+}  
 
-<style>
-  /* RESET */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+@keyframes gradientBG { 0% {background-position:0% 50%;} 50% {background-position:100% 50%;} 100% {background-position:0% 50%;} }  
 
-body{
-  font-family:'Segoe UI',Arial,sans-serif;
-  min-height:100vh;
-  margin-top:80px;
+header{  
+  position:fixed; top:0; left:0; width:100%; z-index:10; display:flex; align-items:center; justify-content:center; padding:20px;  
+  background: linear-gradient(90deg, #00f260, #0575e6, #00c6ff); color:#fff; box-shadow:0 4px 15px rgba(0,0,0,0.2); border-bottom:2px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);  
+}  
 
-  /* خلفية فاتحة وزاهية بتدرج قوي */
-  background: linear-gradient(135deg, #00c6ff, #0072ff, #00ffa1, #faff00);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite; /* تأثير حركة ناعمة */
-}
+header h3{ font-size:2rem; font-weight:900; background: linear-gradient(90deg, #ffb347, #ffcc33, #00ffe7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-shadow: 0 2px 6px rgba(0,0,0,0.25); }  
 
-/* حركة التدرج */
-@keyframes gradientBG {
-  0% {background-position:0% 50%;}
-  50% {background-position:100% 50%;}
-  100% {background-position:0% 50%;}
-}
+.nav{ display:flex; flex-wrap:wrap; gap:10px; padding:10px 5px; max-width:900px; margin:40px auto 10px auto; justify-content:center; }  
 
-/* HEADER */
-header{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  z-index:10;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+.nav button{ flex: 0 1 120px; min-width:100px; border:none; padding:8px 6px; font-size:0.85rem; font-weight:700; border-radius:10px; cursor:pointer; color:#fff; background:rgba(255,255,255,0.12); transition:all 0.3s ease; box-shadow:0 3px 10px rgba(0,0,0,0.3); }  
 
-  /* خلفية فاتحة وزاهية */
-  background: linear-gradient(90deg, #00f260, #0575e6, #00c6ff);
-  color:#fff;
-  box-shadow:0 4px 15px rgba(0,0,0,0.2);
-  border-bottom:2px solid rgba(255,255,255,0.3);
-  backdrop-filter: blur(10px); /* لإضفاء لمسة شفافة أنيقة */
-}
+.nav button:hover{ transform:translateY(-2px) scale(1.05); background: linear-gradient(90deg,#ff6a00,#ee0979,#00f260); box-shadow:0 6px 14px rgba(0,0,0,0.4); }  
 
-header h3{
-  font-size:2rem;
-  font-weight:900;
-  background: linear-gradient(90deg, #ffb347, #ffcc33, #00ffe7);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.25);
-}
+.nav .live{ background:#dc2626; }  
 
-/* NAVIGATION */
-.nav{
-  display:flex;
-  flex-wrap:wrap; /* يسمح بالصفين */
-  gap:10px;
-  padding:10px 5px;
-  max-width:900px;
-  margin:40px auto 10px auto; /* مباعدة عن الهيدر والمحتوى */
-  justify-content:center;
-}
+.nav button.active{ background: linear-gradient(90deg,#ff6a00,#ee0979,#00f260) !important; box-shadow:0 4px 16px rgba(0,0,0,0.5); }  
 
-.nav button{
-  flex: 0 1 120px; /* صغير الحجم، يمكن أن يضغط أو يتوسع */
-  min-width:100px;
-  border:none;
-  padding:8px 6px; /* أصغر حجم */
-  font-size:0.85rem;
-  font-weight:700;
-  border-radius:10px;
-  cursor:pointer;
-  color:#fff;
+#content{ padding:15px; max-width:1100px; margin:0 auto; }  
 
-  background:rgba(255,255,255,0.12);
-  transition:all 0.3s ease;
-  box-shadow:0 3px 10px rgba(0,0,0,0.3);
-}
+iframe{ width:100%; height:700px; border:none; border-radius:15px; margin-bottom:5px; background:#000; box-shadow:0 6px 18px rgba(0,0,0,0.5); transition:transform 0.3s ease; }  
+iframe:hover{ transform:scale(1.01); }  
 
-.nav button:hover{
-  transform:translateY(-2px) scale(1.05);
-  background: linear-gradient(90deg,#ff6a00,#ee0979,#00f260);
-  box-shadow:0 6px 14px rgba(0,0,0,0.4);
-}
+.live-box{ width:100%; max-width:600px; height:300px; border-radius:15px; background: linear-gradient(135deg,#1f1c2c,#4b0075); box-shadow:0 6px 18px rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; text-align:center; font-size:1.3rem; font-weight:800; cursor:pointer; margin:0 auto; }  
+.live-box span{ background: linear-gradient(90deg,#ff6a00,#ee0979); padding:12px 20px; border-radius:12px; color:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.5); }  
 
-/* LIVE BUTTON */
-.nav .live{
-  background:#dc2626;
-}
+.base-ad { width: 320px; }  
 
-/* ACTIVE BUTTON */
-.nav button.active{
-  background: linear-gradient(90deg,#ff6a00,#ee0979,#00f260) !important;
-  box-shadow:0 4px 16px rgba(0,0,0,0.5);
-}
+@media(max-width:768px){ header h3{font-size:1.8rem;} .nav button{ font-size:0.8rem; padding:7px 5px; flex:0 1 45%; } }  
+@media(max-width:480px){ .nav{ flex-direction:row; flex-wrap:wrap; gap:8px; justify-content:center; } .nav button{ flex:0 1 48%; font-size:0.75rem; padding:6px 5px; } iframe{height:450px;} .live-box{height:250px;font-size:1.1rem;} }  
 
-/* CONTENT AREA */
-#content{
-  padding:15px;
-  max-width:1100px;
-  margin:0 auto;
-}
+.ad-box { display: none; }  
 
-/* IFRAME */
-iframe{
-  width:100%;
-  height:700px;
-  border:none;
-  border-radius:15px;
-  margin-bottom:5px;
-  background:#000;
-  box-shadow:0 6px 18px rgba(0,0,0,0.5);
-  transition:transform 0.3s ease;
-}
+.ad{ width:320px; height:50px; margin:15px auto; overflow:hidden; }  
+.ad iframe{ width:320px; height:50px; border:0; display:block; }  
+.ad-fixed{ position:fixed; bottom:0; left:50%; transform:translateX(-50%); z-index:9999; }  
+</style>  
+</head>  
+<body>  
 
-iframe:hover{
-  transform:scale(1.01);
-}
+<header> <h3>TOP SCORE</h3> </header>  
 
-/* LIVE BOX */
-.live-box{
-  width:100%;
-  max-width:600px;
-  height:300px;
-  border-radius:15px;
-  background: linear-gradient(135deg,#1f1c2c,#4b0075);
-  box-shadow:0 6px 18px rgba(0,0,0,0.6);
+<div class="nav">  
+  <button onclick="setActive(this); loadAll()">ALL</button>  
+  <button onclick="setActive(this); loadFrance()">FRANCE</button>  
+  <button onclick="setActive(this); loadEngland()">ENGLAND</button>  
+  <button onclick="setActive(this); loadGermany()">GERMANY</button>  
+  <button class="live" onclick="setActive(this); loadLive()">LIVE</button>  
+</div>  
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+<!-- إعلان 1 بين البوتونات و iframe -->  
+<div class="ad">  
+<script>atOptions={'key':'90e745df8b4e0b6a32d37aef2b9a5129','format':'iframe','width':320,'height':50,'params':{}};</script>  
+<script src="https://www.highperformanceformat.com/90e745df8b4e0b6a32d37aef2b9a5129/invoke.js"></script>  
+</div>  
 
-  font-size:1.3rem;
-  font-weight:800;
-  cursor:pointer;
-  margin:0 auto;
-}
+<div id="content"></div>  
 
-.live-box span{
-  background: linear-gradient(90deg,#ff6a00,#ee0979);
-  padding:12px 20px;
-  border-radius:12px;
-  color:#fff;
-  box-shadow:0 4px 12px rgba(0,0,0,0.5);
-}
+<script>  
+const content = document.getElementById("content");  
 
-/* BASE AD */
-.base-ad {
-  width: 320px;
-  
-}
+function loadAll(){ content.innerHTML = `<iframe src="https://www.scorebat.com/embed/livescore/"></iframe>`; }  
+function loadFrance(){ content.innerHTML = `<iframe src="https://www.scorebat.com/embed/competition/france-ligue-1/"></iframe>`; }  
+function loadEngland(){ content.innerHTML = `<iframe src="https://www.scorebat.com/embed/competition/england-premier-league/"></iframe>`; }  
+function loadGermany(){ content.innerHTML = `<iframe src="https://www.scorebat.com/embed/competition/germany-bundesliga/"></iframe>`; }  
+function loadLive(){ content.innerHTML = `<div class="live-box"><span>🔴 OPENING LIVE…</span></div>`; setTimeout(()=>{ window.location.href="https://www.livescore.com/en/football/live/"; },400); }  
 
-/* RESPONSIVE */
-@media(max-width:768px){
-  header h3{font-size:1.8rem;}
-  .nav button{
-    font-size:0.8rem;
-    padding:7px 5px;
-    flex:0 1 45%; /* يظهر في صفين */
-  }
-}
+document.addEventListener("visibilitychange", function () { if (!document.hidden) { loadAll(); setActive(document.querySelector(".nav button")); } });  
+window.onload = function(){ loadAll(); setActive(document.querySelector(".nav button")); };  
+function setActive(btn){ document.querySelectorAll(".nav button").forEach(b=>{ b.classList.remove("active"); }); btn.classList.add("active"); }  
+</script>  
 
-@media(max-width:480px){
-  .nav{
-    flex-direction:row;
-    flex-wrap:wrap;
-    gap:8px;
-    justify-content:center;
-  }
-  .nav button{
-    flex:0 1 48%; /* صفين تقريبًا */
-    font-size:0.75rem;
-    padding:6px 5px;
-  }
-  iframe{height:450px;}
-  .live-box{height:250px;font-size:1.1rem;}
-}
-  
-  .ad-box {
-    display: none;
-    
-    
-  }
+<!-- إعلان 2 تحت iframe -->  
+<div class="ad"> <script>atOptions={'key':'90e745df8b4e0b6a32d37aef2b9a5129','format':'iframe','width':320,'height':50,'params':{}};</script> <script src="https://www.highperformanceformat.com/90e745df8b4e0b6a32d37aef2b9a5129/invoke.js"></script> </div>  
 
-</style>
-</head>
+<!-- إعلان 3 تحت iframe -->  
+<div class="ad"> <script>atOptions={'key':'90e745df8b4e0b6a32d37aef2b9a5129','format':'iframe','width':320,'height':50,'params':{}};</script> <script src="https://www.highperformanceformat.com/90e745df8b4e0b6a32d37aef2b9a5129/invoke.js"></script> </div>  
 
-<body>
+<!-- إعلان 4 تحت iframe -->  
+<div class="ad"> <script>atOptions={'key':'90e745df8b4e0b6a32d37aef2b9a5129','format':'iframe','width':320,'height':50,'params':{}};</script> <script src="https://www.highperformanceformat.com/90e745df8b4e0b6a32d37aef2b9a5129/invoke.js"></script> </div>  
 
-<header>
+<!-- إعلان 5 ثابت أسفل الشاشة -->  
+<div class="ad ad-fixed"> <script>atOptions={'key':'90e745df8b4e0b6a32d37aef2b9a5129','format':'iframe','width':320,'height':50,'params':{}};</script> <script src="https://www.highperformanceformat.com/90e745df8b4e0b6a32d37aef2b9a5129/invoke.js"></script> </div>  
 
-  <h3>TOP SCORE</h3>
-</header>
-  
-
-
-<div class="nav">
-  <button onclick="setActive(this); loadAll()">ALL</button>
-  <button onclick="setActive(this); loadFrance()">FRANCE</button>
-  <button onclick="setActive(this); loadEngland()">ENGLAND</button>
-  <button onclick="setActive(this); loadGermany()">GERMANY</button>
-  <button class="live" onclick="setActive(this); loadLive()">LIVE</button>
-</div>
-
-
-
-<div id="content"></div>
-
-<script>
-const content = document.getElementById("content");
-
-function loadAll(){
-  content.innerHTML = `
-    <iframe src="https://www.scorebat.com/embed/livescore/"></iframe>
-  `;
-}
-
-function loadFrance(){
-  content.innerHTML = `
-    <iframe src="https://www.scorebat.com/embed/competition/france-ligue-1/"></iframe>
-  `;
-}
-
-function loadEngland(){
-  content.innerHTML = `
-    <iframe src="https://www.scorebat.com/embed/competition/england-premier-league/"></iframe>
-  `;
-}
-
-function loadGermany(){
-  content.innerHTML = `
-    <iframe src="https://www.scorebat.com/embed/competition/germany-bundesliga/"></iframe>
-  `;
-}
-
-function loadLive(){
-  content.innerHTML = `
-    <div class="live-box">
-      <span>🔴 OPENING LIVE…</span>
-    </div>
-  `;
-  setTimeout(()=>{
-    window.location.href = "https://www.livescore.com/en/football/live/";
-  }, 400);
-}
-
-/* BACK FROM EXTERNAL */
-document.addEventListener("visibilitychange", function () {
-  if (!document.hidden) {
-    loadAll();
-    setActive(document.querySelector(".nav button"));
-  }
-});
-
-/* ON LOAD */
-window.onload = function(){
-  loadAll();
-  setActive(document.querySelector(".nav button"));
-};
-
-function setActive(btn){
-  document.querySelectorAll(".nav button").forEach(b=>{
-    b.classList.remove("active");
-  });
-  btn.classList.add("active");
-}
-</script>
-
-  
-</script>
-  <script async="async" data-cfasync="false" src="https://pl28525773.effectivegatecpm.com/ee0ef651f481f5e11b08745c958b22ac/invoke.js"></script>
-<div id="container-ee0ef651f481f5e11b08745c958b22ac"></div>
-
-
-  <script src="https://pl28491411.effectivegatecpm.com/3d/99/b1/3d99b18483592ed475b432a3eefbb12b.js"></script>
-  
-</body>
+</body>  
 </html>
